@@ -64,19 +64,16 @@ const pages = document.querySelectorAll("[data-page]");
 
 const activatePage = function (name) {
   for (let i = 0; i < pages.length; i++) {
-    if (name === pages[i].dataset.page) {
-      pages[i].classList.add("active");
-      navigationLinks[i].classList.add("active");
-    } else {
-      pages[i].classList.remove("active");
-      navigationLinks[i].classList.remove("active");
-    }
+    pages[i].classList.toggle("active", name === pages[i].dataset.page);
+  }
+  for (let i = 0; i < navigationLinks.length; i++) {
+    navigationLinks[i].classList.toggle("active", name === navigationLinks[i].innerHTML.toLowerCase());
   }
 };
 
 // activate tab from URL hash on load (e.g. index.html#blog)
 const hash = window.location.hash.slice(1);
-if (hash) activatePage(hash);
+if (hash) { activatePage(hash); window.scrollTo(0, 0); }
 
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
