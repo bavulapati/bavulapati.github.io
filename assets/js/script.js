@@ -78,7 +78,9 @@ if (hash) { activatePage(hash); window.scrollTo(0, 0); }
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
-    activatePage(this.innerHTML.toLowerCase());
+    const name = this.innerHTML.toLowerCase();
+    activatePage(name);
+    history.replaceState(null, "", "#" + name);
     window.scrollTo(0, 0);
   });
 }
