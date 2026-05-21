@@ -7,7 +7,7 @@
     <meta name="description" content="Four packages that let the same spec generating your JS code also generate Swift — typed structs, binary codecs, and a full HRPC peer class." />
     <meta property="og:title" content="Swift peers in the bare RPC ecosystem — Bala Avulapati" />
     <meta property="og:description" content="Four packages that let the same spec generating your JS code also generate Swift — typed structs, binary codecs, and a full HRPC peer class." />
-    <meta property="og:image" content="https://bavulapati.com/assets/images/blog-hrpc-swift.svg" />
+    <meta property="og:image" content="https://bavulapati.com/assets/images/blog-hrpc-swift.png" />
     <title>Swift peers in the bare RPC ecosystem — Bala Avulapati</title>
     <link rel="shortcut icon" href="../assets/images/letter.png" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -185,10 +185,10 @@
         <p>Four packages close that gap. The same spec that generates your JS code now generates Swift.</p>
 
         <ul>
-          <li><a href="https://github.com/holepunchto/compact-encoding-swift"><strong>compact-encoding-swift</strong></a> — the codec layer, wire-compatible with the JS <code>compact-encoding</code> module</li>
-          <li><a href="https://github.com/holepunchto/bare-rpc-swift"><strong>bare-rpc-swift</strong></a> — the bare-rpc framing protocol in Swift, wire-compatible with the JS module</li>
-          <li><a href="https://github.com/holepunchto/hyperschema-swift"><strong>hyperschema-swift</strong></a> — codegen: schema definitions → Swift structs with binary encode/decode</li>
-          <li><a href="https://github.com/holepunchto/hrpc-swift"><strong>hrpc-swift</strong></a> — codegen: schema + handler definitions → a typed Swift <code>HRPC</code> class</li>
+          <li><a href="https://github.com/holepunchto/compact-encoding-swift" target="_blank" rel="noopener"><strong>compact-encoding-swift</strong></a> — the codec layer, wire-compatible with the JS <code>compact-encoding</code> module</li>
+          <li><a href="https://github.com/holepunchto/bare-rpc-swift" target="_blank" rel="noopener"><strong>bare-rpc-swift</strong></a> — the bare-rpc framing protocol in Swift, wire-compatible with the JS module</li>
+          <li><a href="https://github.com/holepunchto/hyperschema-swift" target="_blank" rel="noopener"><strong>hyperschema-swift</strong></a> — codegen: schema definitions → Swift structs with binary encode/decode</li>
+          <li><a href="https://github.com/holepunchto/hrpc-swift" target="_blank" rel="noopener"><strong>hrpc-swift</strong></a> — codegen: schema + handler definitions → a typed Swift <code>HRPC</code> class</li>
         </ul>
 
         <p>All four are available now — the codegen tools on npm, the Swift runtime packages via Swift Package Manager.</p>
@@ -343,7 +343,7 @@ await peer.receive(data)</code></pre>
 
         <h2>What this opens up</h2>
 
-        <p><strong>Clean separation of concerns in iOS and macOS apps.</strong> Run your p2p networking stack as a <a href="https://github.com/holepunchto/bare-kit">bare-kit</a> worklet — the entire Holepunch ecosystem in JS, where it lives — and write your UI and business logic in native Swift. hrpc-swift bridges the two: the same spec that defines your worklet's interface generates the Swift types and RPC methods automatically. The worklet owns the network; Swift owns the experience.</p>
+        <p><strong>Clean separation of concerns in iOS and macOS apps.</strong> Run your p2p networking stack as a <a href="https://github.com/holepunchto/bare-kit" target="_blank" rel="noopener">bare-kit</a> worklet — the entire Holepunch ecosystem in JS, where it lives — and write your UI and business logic in native Swift. hrpc-swift bridges the two: the same spec that defines your worklet's interface generates the Swift types and RPC methods automatically. The worklet owns the network; Swift owns the experience.</p>
 
         <div class="diagram">Swift (UI + business logic)
     ↕  hrpc-swift over bare-kit IPC
@@ -359,7 +359,7 @@ The network</div>
 
         <h2>Try it</h2>
 
-        <p>All four packages are on GitHub under <code>holepunchto</code>. A complete runnable example — schema definition, codegen, two Swift peers over an in-memory pipe — lives in <a href="https://github.com/holepunchto/hrpc-swift/tree/main/example">hrpc-swift/example</a>.</p>
+        <p>All four packages are on GitHub under <code>holepunchto</code>. A complete runnable example — schema definition, codegen, two Swift peers over an in-memory pipe — lives in <a href="https://github.com/holepunchto/hrpc-swift/tree/main/example" target="_blank" rel="noopener">hrpc-swift/example</a>.</p>
 
         <p>If you're building something on top of this, we'd like to hear about it. File issues, open PRs, or just show us what you make.</p>
       </article>
