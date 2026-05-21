@@ -1,89 +1,55 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
   <defs>
     <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-      <circle cx="20" cy="20" r="1.5" fill="#262628"/>
+      <circle cx="20" cy="20" r="1.5" fill="#252527"/>
     </pattern>
     <marker id="arr-gold" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#FFD057" opacity="0.75"/>
+      <polygon points="0 0, 8 3, 0 6" fill="#FFD057" opacity="0.8"/>
     </marker>
-    <marker id="arr-wire" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <marker id="arr-gray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
       <polygon points="0 0, 8 3, 0 6" fill="#555"/>
     </marker>
-    <marker id="arr-wire-r" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse">
+    <marker id="arr-gray-rev" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse">
       <polygon points="8 0, 0 3, 8 6" fill="#555"/>
     </marker>
   </defs>
 
   <!-- Background -->
   <rect width="800" height="400" fill="#1a1a1b"/>
-  <rect width="800" height="400" fill="url(#dots)" opacity="0.6"/>
+  <rect width="800" height="400" fill="url(#dots)" opacity="0.7"/>
 
-  <!-- Subtle glow behind spec box -->
-  <ellipse cx="400" cy="115" rx="140" ry="50" fill="#FFD057" opacity="0.04"/>
+  <!-- Node glows -->
+  <ellipse cx="400" cy="105" rx="130" ry="55" fill="#FFD057" opacity="0.05"/>
+  <ellipse cx="185" cy="285" rx="115" ry="115" fill="#FA7343" opacity="0.07"/>
+  <ellipse cx="615" cy="285" rx="115" ry="115" fill="#F7DF1E" opacity="0.06"/>
 
-  <!-- Dashed generate lines: spec → Swift -->
-  <line x1="352" y1="147" x2="244" y2="240"
-        stroke="#FFD057" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.55"
+  <!-- Lines (behind nodes) -->
+  <line x1="365" y1="134" x2="243" y2="237"
+        stroke="#FFD057" stroke-width="1.5" stroke-dasharray="7 5" opacity="0.5"
         marker-end="url(#arr-gold)"/>
-
-  <!-- Dashed generate lines: spec → JS -->
-  <line x1="448" y1="147" x2="556" y2="240"
-        stroke="#FFD057" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.55"
+  <line x1="435" y1="134" x2="557" y2="237"
+        stroke="#FFD057" stroke-width="1.5" stroke-dasharray="7 5" opacity="0.5"
         marker-end="url(#arr-gold)"/>
-
-  <!-- "generates" label on left line -->
-  <text font-family="ui-monospace, 'SF Mono', Consolas, monospace" font-size="11"
-        fill="#FFD057" opacity="0.5"
-        transform="translate(272, 210) rotate(-42)">generates</text>
-
-  <!-- "generates" label on right line -->
-  <text font-family="ui-monospace, 'SF Mono', Consolas, monospace" font-size="11"
-        fill="#FFD057" opacity="0.5"
-        transform="translate(480, 172) rotate(42)">generates</text>
-
-  <!-- Wire protocol line: Swift ↔ JS -->
-  <line x1="262" y1="290" x2="538" y2="290"
-        stroke="#484848" stroke-width="1.5"
-        marker-start="url(#arr-wire-r)" marker-end="url(#arr-wire)"/>
-  <text x="400" y="282" font-family="ui-monospace, 'SF Mono', Consolas, monospace"
-        font-size="11" fill="#666" text-anchor="middle">bare-rpc wire</text>
+  <line x1="260" y1="285" x2="540" y2="285"
+        stroke="#444" stroke-width="1.5"
+        marker-start="url(#arr-gray-rev)" marker-end="url(#arr-gray)"/>
 
   <!-- Spec box -->
-  <rect x="288" y="57" width="224" height="64" rx="10"
-        fill="#1f1a09" stroke="#FFD057" stroke-width="1.5" opacity="0.95"/>
-  <text x="400" y="80" font-family="ui-monospace, 'SF Mono', Consolas, monospace"
-        font-size="11" fill="#FFD057" text-anchor="middle" opacity="0.65">hyperschema</text>
-  <text x="400" y="104" font-family="ui-monospace, 'SF Mono', Consolas, monospace"
-        font-size="20" fill="#FFD057" text-anchor="middle" font-weight="600">spec</text>
+  <rect x="310" y="76" width="180" height="58" rx="10"
+        fill="#191508" stroke="#FFD057" stroke-width="1.5"/>
+  <text x="400" y="115"
+        font-family="ui-monospace, 'SF Mono', Consolas, monospace"
+        font-size="24" font-weight="600" fill="#FFD057" text-anchor="middle">spec</text>
 
-  <!-- npm badge under spec -->
-  <rect x="368" y="130" width="64" height="20" rx="4" fill="#1a1a1b" stroke="#444" stroke-width="1"/>
-  <text x="400" y="144" font-family="ui-monospace, 'SF Mono', Consolas, monospace"
-        font-size="10" fill="#666" text-anchor="middle">npm install</text>
+  <!-- Swift peer -->
+  <circle cx="185" cy="285" r="75" fill="#180d07" stroke="#FA7343" stroke-width="1.5"/>
+  <text x="185" y="294"
+        font-family="ui-monospace, 'SF Mono', Consolas, monospace"
+        font-size="24" font-weight="600" fill="#FA7343" text-anchor="middle">Swift</text>
 
-  <!-- Swift peer node -->
-  <circle cx="200" cy="290" r="62" fill="#1c0e07" stroke="#FA7343" stroke-width="1.5" opacity="0.95"/>
-  <text x="200" y="282" font-family="ui-monospace, 'SF Mono', Consolas, monospace"
-        font-size="11" fill="#FA7343" text-anchor="middle" opacity="0.65">peer</text>
-  <text x="200" y="307" font-family="ui-monospace, 'SF Mono', Consolas, monospace"
-        font-size="20" fill="#FA7343" text-anchor="middle" font-weight="600">Swift</text>
-
-  <!-- Swift SPM label -->
-  <text x="200" y="368" font-family="ui-monospace, 'SF Mono', Consolas, monospace"
-        font-size="10" fill="#555" text-anchor="middle">Swift Package Manager</text>
-
-  <!-- JS peer node -->
-  <circle cx="600" cy="290" r="62" fill="#1c1b07" stroke="#F7DF1E" stroke-width="1.5" opacity="0.9"/>
-  <text x="600" y="282" font-family="ui-monospace, 'SF Mono', Consolas, monospace"
-        font-size="11" fill="#F7DF1E" text-anchor="middle" opacity="0.65">peer</text>
-  <text x="600" y="307" font-family="ui-monospace, 'SF Mono', Consolas, monospace"
-        font-size="20" fill="#F7DF1E" text-anchor="middle" font-weight="600">JS</text>
-
-  <!-- JS npm label -->
-  <text x="600" y="368" font-family="ui-monospace, 'SF Mono', Consolas, monospace"
-        font-size="10" fill="#555" text-anchor="middle">npm</text>
-
-  <!-- hrpc-swift watermark -->
-  <text x="400" y="392" font-family="ui-monospace, 'SF Mono', Consolas, monospace"
-        font-size="11" fill="#333" text-anchor="middle">hrpc-swift</text>
+  <!-- JS peer -->
+  <circle cx="615" cy="285" r="75" fill="#18180a" stroke="#F7DF1E" stroke-width="1.5"/>
+  <text x="615" y="294"
+        font-family="ui-monospace, 'SF Mono', Consolas, monospace"
+        font-size="24" font-weight="600" fill="#F7DF1E" text-anchor="middle">JS</text>
 </svg>
