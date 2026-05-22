@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <title>Swift peers in the bare RPC ecosystem</title>
+  <defs>
+    <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="1.5" fill="#252527"/>
+    </pattern>
+    <marker id="arr-gold" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#FFD057" opacity="0.8"/>
+    </marker>
+    <marker id="arr-gray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+    </marker>
+    <marker id="arr-gray-rev" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse">
+      <polygon points="8 0, 0 3, 8 6" fill="#555"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="#1a1a1b"/>
+  <rect width="800" height="400" fill="url(#dots)" opacity="0.7"/>
+
+  <!-- Node glows -->
+  <ellipse cx="400" cy="105" rx="130" ry="55" fill="#FFD057" opacity="0.05"/>
+  <ellipse cx="185" cy="285" rx="115" ry="115" fill="#FA7343" opacity="0.07"/>
+  <ellipse cx="615" cy="285" rx="115" ry="115" fill="#F7DF1E" opacity="0.06"/>
+
+  <!-- Lines (behind nodes) -->
+  <line x1="365" y1="134" x2="243" y2="237"
+        stroke="#FFD057" stroke-width="1.5" stroke-dasharray="7 5" opacity="0.5"
+        marker-end="url(#arr-gold)"/>
+  <line x1="435" y1="134" x2="557" y2="237"
+        stroke="#FFD057" stroke-width="1.5" stroke-dasharray="7 5" opacity="0.5"
+        marker-end="url(#arr-gold)"/>
+  <line x1="260" y1="285" x2="540" y2="285"
+        stroke="#444" stroke-width="1.5"
+        marker-start="url(#arr-gray-rev)" marker-end="url(#arr-gray)"/>
+
+  <!-- Spec box -->
+  <rect x="310" y="76" width="180" height="58" rx="10"
+        fill="#191508" stroke="#FFD057" stroke-width="1.5"/>
+  <text x="400" y="115"
+        font-family="ui-monospace, 'SF Mono', Consolas, monospace"
+        font-size="24" font-weight="600" fill="#FFD057" text-anchor="middle">spec</text>
+
+  <!-- Swift peer -->
+  <circle cx="185" cy="285" r="75" fill="#180d07" stroke="#FA7343" stroke-width="1.5"/>
+  <text x="185" y="294"
+        font-family="ui-monospace, 'SF Mono', Consolas, monospace"
+        font-size="24" font-weight="600" fill="#FA7343" text-anchor="middle">Swift</text>
+
+  <!-- JS peer -->
+  <circle cx="615" cy="285" r="75" fill="#18180a" stroke="#F7DF1E" stroke-width="1.5"/>
+  <text x="615" y="294"
+        font-family="ui-monospace, 'SF Mono', Consolas, monospace"
+        font-size="24" font-weight="600" fill="#F7DF1E" text-anchor="middle">JS</text>
+</svg>

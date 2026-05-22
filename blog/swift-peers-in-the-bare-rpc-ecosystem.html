@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Four packages that let the same spec generating your JS code also generate Swift — typed structs, binary codecs, and a full HRPC peer class." />
+    <meta property="og:title" content="Swift peers in the bare RPC ecosystem — Bala Avulapati" />
+    <meta property="og:description" content="Four packages that let the same spec generating your JS code also generate Swift — typed structs, binary codecs, and a full HRPC peer class." />
+    <meta property="og:image" content="https://bavulapati.com/assets/images/blog-hrpc-swift.png" />
+    <title>Swift peers in the bare RPC ecosystem — Bala Avulapati</title>
+    <link rel="shortcut icon" href="../assets/images/letter.png" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.8;
+        background-color: hsl(240, 2%, 12%);
+        color: hsl(0, 0%, 84%);
+      }
+
+      a { color: hsl(45, 100%, 72%); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid hsl(0, 0%, 22%);
+        padding: 20px 0;
+        margin-bottom: 48px;
+      }
+
+      header a {
+        font-size: 13px;
+        color: hsl(0, 0%, 60%);
+        text-decoration: none;
+      }
+
+      header a:hover { color: hsl(45, 100%, 72%); }
+
+      .back-link { font-size: 13px; }
+
+      .contact-links {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .contact-links a {
+        display: flex;
+        align-items: center;
+        color: hsl(0, 0%, 50%);
+        transition: color 0.25s ease;
+      }
+
+      .contact-links a:hover { color: hsl(45, 100%, 72%); }
+
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 40px 24px 80px;
+      }
+
+      h1 {
+        font-size: 36px;
+        font-weight: 600;
+        color: hsl(0, 0%, 98%);
+        line-height: 1.3;
+        margin-bottom: 12px;
+      }
+
+      .meta {
+        font-size: 13px;
+        color: hsl(0, 0%, 60%);
+        margin-bottom: 40px;
+      }
+
+      h2 {
+        font-size: 22px;
+        font-weight: 600;
+        color: hsl(0, 0%, 98%);
+        margin: 48px 0 16px;
+      }
+
+      p { margin-bottom: 16px; }
+
+      ul, ol {
+        padding-left: 24px;
+        margin-bottom: 16px;
+      }
+
+      li { margin-bottom: 6px; }
+
+      strong { color: hsl(0, 0%, 98%); font-weight: 600; }
+
+      code {
+        font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+        font-size: 13px;
+        background: hsl(240, 1%, 17%);
+        border: 1px solid hsl(0, 0%, 22%);
+        border-radius: 4px;
+        padding: 1px 5px;
+        color: hsl(45, 100%, 72%);
+      }
+
+      pre {
+        background: hsl(240, 1%, 17%);
+        border: 1px solid hsl(0, 0%, 22%);
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        overflow-x: auto;
+      }
+
+      pre code {
+        background: none;
+        border: none;
+        padding: 0;
+        color: hsl(0, 0%, 84%);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      hr {
+        border: none;
+        border-top: 1px solid hsl(0, 0%, 22%);
+        margin: 48px 0;
+      }
+
+      .diagram {
+        background: hsl(240, 1%, 17%);
+        border: 1px solid hsl(0, 0%, 22%);
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+        font-size: 13px;
+        line-height: 1.7;
+        white-space: pre;
+        color: hsl(0, 0%, 84%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html#blog" class="back-link">← Back to blog</a>
+        <nav class="contact-links">
+          <a href="mailto:ba@bavulapati.com" title="Email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+          </a>
+          <a href="https://github.com/bavulapati" target="_blank" rel="noopener" title="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/bavulapati" target="_blank" rel="noopener" title="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+        </nav>
+      </header>
+
+      <article>
+        <h1>Swift peers in the bare RPC ecosystem</h1>
+        <p class="meta">May 21, 2026 &middot; Open Source</p>
+
+        <p>
+          If you're building on hrpc today, your JavaScript peers are generated from the spec. Your Swift peers are written by hand. Every type, every codec, every command ID — maintained separately, drifting a little further from the canonical schema with each change. Update the spec and your JS peer updates automatically. Your Swift peer needs a manual edit, in the right place, for every field, every handler, every time.
+        </p>
+
+        <p>Four packages close that gap. The same spec that generates your JS code now generates Swift.</p>
+
+        <ul>
+          <li><a href="https://github.com/holepunchto/compact-encoding-swift" target="_blank" rel="noopener"><strong>compact-encoding-swift</strong></a> — the codec layer, wire-compatible with the JS <code>compact-encoding</code> module</li>
+          <li><a href="https://github.com/holepunchto/bare-rpc-swift" target="_blank" rel="noopener"><strong>bare-rpc-swift</strong></a> — the bare-rpc framing protocol in Swift, wire-compatible with the JS module</li>
+          <li><a href="https://github.com/holepunchto/hyperschema-swift" target="_blank" rel="noopener"><strong>hyperschema-swift</strong></a> — codegen: schema definitions → Swift structs with binary encode/decode</li>
+          <li><a href="https://github.com/holepunchto/hrpc-swift" target="_blank" rel="noopener"><strong>hrpc-swift</strong></a> — codegen: schema + handler definitions → a typed Swift <code>HRPC</code> class</li>
+        </ul>
+
+        <p>All four are available now — the codegen tools on npm, the Swift runtime packages via Swift Package Manager.</p>
+
+        <hr />
+
+        <h2>Your spec already knows what to generate</h2>
+
+        <p>Add two packages:</p>
+
+        <pre><code>npm install hyperschema-swift hrpc-swift</code></pre>
+
+        <p>Point them at your existing spec:</p>
+
+        <pre><code>const SwiftHyperschema = require('hyperschema-swift')
+const SwiftHRPC = require('hrpc-swift')
+
+const schema = SwiftHyperschema.from('./spec/hyperschema')
+const hrpc = SwiftHRPC.from(schema)
+
+SwiftHyperschema.toDisk(schema, './swift/schema')
+SwiftHRPC.toDisk(hrpc, './swift/hrpc', {
+  schemaPackagePath: '../schema',
+  schemaPackageName: 'Schema',
+  schemaPackageId: 'schema'
+})</code></pre>
+
+        <pre><code>node generate.js</code></pre>
+
+        <p>Two Swift packages appear on disk — schema types and a typed <code>HRPC</code> class, one method per handler. Drop them into any Xcode project or Swift package. Nothing else to write.</p>
+
+        <hr />
+
+        <h2>A Swift peer is symmetric</h2>
+
+        <p>The generated <code>HRPC</code> class is the same on every peer. Any instance can register handlers, make calls, or do both at once. There is no client type and no server type — just peers.</p>
+
+        <p>Here's a chat example. Both peers register handlers and both initiate:</p>
+
+        <pre><code>let peerA = HRPC(delegate: transportA)
+let peerB = HRPC(delegate: transportB)
+
+// peerB handles incoming messages
+peerB.onSendMessage { req in
+  guard let req else { return SendMessageResponse(id: 0, timestamp: 0) }
+  let msg = Message(id: nextId, text: req.text, timestamp: UInt(Date().timeIntervalSince1970))
+
+  // peerB pushes a notification back to peerA
+  try await peerB.newMessage(msg)
+
+  return SendMessageResponse(id: msg.id, timestamp: msg.timestamp)
+}
+
+// peerA listens for incoming events
+peerA.onNewMessage { msg in
+  guard let msg else { return }
+  print("New message: \(msg.text)")
+}
+
+// peerA initiates a call
+let reply = try await peerA.sendMessage(SendMessageRequest(text: "Hello"))
+print("Acknowledged, id: \(reply.id)")</code></pre>
+
+        <p>Typed arguments. Typed return values. <code>async/await</code> throughout. No command IDs, no manual encoding, no <code>Data</code> wrangling.</p>
+
+        <hr />
+
+        <h2>All five patterns, including streaming</h2>
+
+        <p>bare-rpc has five communication patterns. All five generate idiomatic Swift.</p>
+
+        <p><strong>Unary</strong> — one peer asks, the other answers.</p>
+
+        <p><strong>Send-only events</strong> — fire and forget, no reply expected. Either peer can push these at any time.</p>
+
+        <p><strong>Response-stream</strong> — one peer opens a stream and the other feeds chunks into it. The handler receives the stream as a parameter; the other side gets an <code>AsyncSequence</code> to iterate:</p>
+
+        <pre><code>// Handler peer writes into the stream
+peerB.onSync { req, stream in
+  for entry in localLog {
+    await stream.write(entry)
+  }
+  await stream.end()
+}
+
+// Other peer iterates the incoming chunks
+let stream = try await peerA.sync(SyncRequest(since: lastSeen))
+for try await entry in stream {
+  apply(entry)
+}</code></pre>
+
+        <p><strong>Request-stream</strong> — one peer streams data into a closure; the handler peer accumulates and replies once:</p>
+
+        <pre><code>// Handler peer reads the incoming stream
+peerB.onPush { stream in
+  for try await chunk in stream {
+    accumulate(chunk)
+  }
+  return PushResponse(accepted: true)
+}
+
+// Other peer writes into the stream; it closes when the closure returns
+let response = try await peerA.push { stream in
+  for chunk in pendingWrites {
+    await stream.write(chunk)
+  }
+}</code></pre>
+
+        <p><strong>Duplex</strong> — both peers stream concurrently. Both sides get a read stream and a write stream at the same time:</p>
+
+        <pre><code>// One peer echoes everything back
+peerB.onPipe { incoming, outgoing in
+  for try await chunk in incoming {
+    await outgoing.write(chunk)
+  }
+  await outgoing.end()
+}
+
+// The other peer sends and receives simultaneously
+try await peerA.pipe { outgoing, incoming in
+  await outgoing.write(chunkA)
+  await outgoing.write(chunkB)
+  await outgoing.end()
+
+  for try await chunk in incoming {
+    handle(chunk)
+  }
+}</code></pre>
+
+        <p>Swift's structured concurrency maps onto all five patterns without friction. No callbacks, no manual stream state.</p>
+
+        <hr />
+
+        <h2>Wiring to a transport</h2>
+
+        <p><code>bare-rpc-swift</code> is transport-agnostic. Implement one delegate protocol, feed it bytes:</p>
+
+        <pre><code>class MyTransport: RPCDelegate {
+  func rpc(_ rpc: RPC, send data: Data) {
+    connection.send(data)
+  }
+}
+
+let peer = HRPC(delegate: MyTransport())
+
+// when bytes arrive:
+await peer.receive(data)</code></pre>
+
+        <p>That's the entire integration surface. TCP, WebSocket, Unix socket, in-process pipe — the protocol doesn't care. The wire format is identical to the JS module, so a Swift peer talks directly to any bare-rpc peer in the network.</p>
+
+        <hr />
+
+        <h2>What this opens up</h2>
+
+        <p><strong>Clean separation of concerns in iOS and macOS apps.</strong> Run your p2p networking stack as a <a href="https://github.com/holepunchto/bare-kit" target="_blank" rel="noopener">bare-kit</a> worklet — the entire Holepunch ecosystem in JS, where it lives — and write your UI and business logic in native Swift. hrpc-swift bridges the two: the same spec that defines your worklet's interface generates the Swift types and RPC methods automatically. The worklet owns the network; Swift owns the experience.</p>
+
+        <div class="diagram">Swift (UI + business logic)
+    ↕  hrpc-swift over bare-kit IPC
+Bare worklet (Hyperswarm, HyperDHT, all p2p networking in JS)
+    ↕
+The network</div>
+
+        <p><strong>Swift devices as full peers.</strong> An iPhone or Mac is no longer bolted on the side — it's a node. It can register handlers, open streams, push events, and participate in duplex exchanges with any other peer in the network.</p>
+
+        <p><strong>One spec, every platform.</strong> Hyperschema already targets JS. It now targets Swift too. Add a handler, regenerate, and both sides update. Rename a field and the Swift compiler tells you everywhere that needs fixing. The spec is the single source of truth for the entire network.</p>
+
+        <hr />
+
+        <h2>Try it</h2>
+
+        <p>All four packages are on GitHub under <code>holepunchto</code>. A complete runnable example — schema definition, codegen, two Swift peers over an in-memory pipe — lives in <a href="https://github.com/holepunchto/hrpc-swift/tree/main/example" target="_blank" rel="noopener">hrpc-swift/example</a>.</p>
+
+        <p>If you're building something on top of this, we'd like to hear about it. File issues, open PRs, or just show us what you make.</p>
+      </article>
+    </div>
+  </body>
+</html>
