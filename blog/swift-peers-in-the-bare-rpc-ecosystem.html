@@ -144,7 +144,7 @@
         padding: 20px;
         margin: 20px 0;
         font-family: "SF Mono", "Fira Code", "Consolas", monospace;
-        font-size: 13px;
+        font-size: 15px;
         line-height: 1.7;
         white-space: pre;
         color: hsl(0, 0%, 84%);
@@ -349,9 +349,9 @@ await peer.receive(data)</code></pre>
         <p><strong>Clean separation of concerns in iOS and macOS apps.</strong> Run your p2p networking stack as a <a href="https://github.com/holepunchto/bare-kit" target="_blank" rel="noopener">bare-kit</a> worklet — the entire Holepunch ecosystem in JS, where it lives — and write your UI and business logic in native Swift. hrpc-swift bridges the two: the same spec that defines your worklet's interface generates the Swift types and RPC methods automatically. The worklet owns the network; Swift owns the experience.</p>
 
         <div class="diagram">Swift (UI + business logic)
-    ↕  hrpc-swift over bare-kit IPC
+    ⇕  hrpc-swift over bare-kit IPC
 Bare worklet (Hyperswarm, HyperDHT, all p2p networking in JS)
-    ↕
+    ⇕
 The network</div>
 
         <p><strong>Swift devices as full peers.</strong> An iPhone or Mac is no longer bolted on the side — it's a node. It can register handlers, open streams, push events, and participate in duplex exchanges with any other peer in the network.</p>
