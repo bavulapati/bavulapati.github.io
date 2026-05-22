@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
     <style>
       *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -134,6 +135,8 @@
         margin: 48px 0;
       }
 
+      .hljs { background: transparent; padding: 0; }
+
       .diagram {
         background: hsl(240, 1%, 17%);
         border: 1px solid hsl(0, 0%, 22%);
@@ -199,11 +202,11 @@
 
         <p>Add two packages:</p>
 
-        <pre><code>npm install hyperschema-swift hrpc-swift</code></pre>
+        <pre><code class="language-bash">npm install hyperschema-swift hrpc-swift</code></pre>
 
         <p>Point them at your existing spec:</p>
 
-        <pre><code>const SwiftHyperschema = require('hyperschema-swift')
+        <pre><code class="language-javascript">const SwiftHyperschema = require('hyperschema-swift')
 const SwiftHRPC = require('hrpc-swift')
 
 const schema = SwiftHyperschema.from('./spec/hyperschema')
@@ -216,7 +219,7 @@ SwiftHRPC.toDisk(hrpc, './swift/hrpc', {
   schemaPackageId: 'schema'
 })</code></pre>
 
-        <pre><code>node generate.js</code></pre>
+        <pre><code class="language-bash">node generate.js</code></pre>
 
         <p>Two Swift packages appear on disk — schema types and a typed <code>HRPC</code> class, one method per handler. Drop them into any Xcode project or Swift package. Nothing else to write.</p>
 
@@ -228,7 +231,7 @@ SwiftHRPC.toDisk(hrpc, './swift/hrpc', {
 
         <p>Here's a chat example. Both peers register handlers and both initiate:</p>
 
-        <pre><code>let peerA = HRPC(delegate: transportA)
+        <pre><code class="language-swift">let peerA = HRPC(delegate: transportA)
 let peerB = HRPC(delegate: transportB)
 
 // peerB handles incoming messages
@@ -266,7 +269,7 @@ print("Acknowledged, id: \(reply.id)")</code></pre>
 
         <p><strong>Response-stream</strong> — one peer opens a stream and the other feeds chunks into it. The handler receives the stream as a parameter; the other side gets an <code>AsyncSequence</code> to iterate:</p>
 
-        <pre><code>// Handler peer writes into the stream
+        <pre><code class="language-swift">// Handler peer writes into the stream
 peerB.onSync { req, stream in
   for entry in localLog {
     await stream.write(entry)
@@ -282,7 +285,7 @@ for try await entry in stream {
 
         <p><strong>Request-stream</strong> — one peer streams data into a closure; the handler peer accumulates and replies once:</p>
 
-        <pre><code>// Handler peer reads the incoming stream
+        <pre><code class="language-swift">// Handler peer reads the incoming stream
 peerB.onPush { stream in
   for try await chunk in stream {
     accumulate(chunk)
@@ -299,7 +302,7 @@ let response = try await peerA.push { stream in
 
         <p><strong>Duplex</strong> — both peers stream concurrently. Both sides get a read stream and a write stream at the same time:</p>
 
-        <pre><code>// One peer echoes everything back
+        <pre><code class="language-swift">// One peer echoes everything back
 peerB.onPipe { incoming, outgoing in
   for try await chunk in incoming {
     await outgoing.write(chunk)
@@ -326,7 +329,7 @@ try await peerA.pipe { outgoing, incoming in
 
         <p><code>bare-rpc-swift</code> is transport-agnostic. Implement one delegate protocol, feed it bytes:</p>
 
-        <pre><code>class MyTransport: RPCDelegate {
+        <pre><code class="language-swift">class MyTransport: RPCDelegate {
   func rpc(_ rpc: RPC, send data: Data) {
     connection.send(data)
   }
@@ -364,5 +367,7 @@ The network</div>
         <p>If you're building something on top of this, we'd like to hear about it. File issues, open PRs, or just show us what you make.</p>
       </article>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
   </body>
 </html>
