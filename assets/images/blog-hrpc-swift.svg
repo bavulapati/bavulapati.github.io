@@ -19,6 +19,11 @@
   <rect width="800" height="400" fill="#1a1a1b"/>
   <rect width="800" height="400" fill="url(#dots)" opacity="0.7"/>
 
+  <!-- Title -->
+  <text x="400" y="36"
+        font-family="ui-monospace, 'SF Mono', Consolas, monospace"
+        font-size="18" font-weight="700" fill="#e0e0e0" letter-spacing="0.5"
+        text-anchor="middle">Bare RPC Ecosystem</text>
   <!-- Node glows -->
   <ellipse cx="400" cy="105" rx="130" ry="55" fill="#FFD057" opacity="0.05"/>
   <ellipse cx="185" cy="285" rx="115" ry="115" fill="#FA7343" opacity="0.07"/>
@@ -35,22 +40,50 @@
         stroke="#444" stroke-width="1.5"
         marker-start="url(#arr-gray-rev)" marker-end="url(#arr-gray)"/>
 
+  <!-- Codegen label on left dashed arrow -->
+  <g transform="rotate(-40, 304, 183)">
+    <rect x="264" y="173" width="80" height="15" rx="2" fill="#1a1a1b" opacity="0.75"/>
+    <text x="304" y="184"
+          font-family="ui-monospace, 'SF Mono', Consolas, monospace"
+          font-size="11" fill="#FFD057" opacity="0.85" text-anchor="middle">codegen</text>
+  </g>
+
+  <!-- Codegen label on right dashed arrow -->
+  <g transform="rotate(40, 496, 183)">
+    <rect x="456" y="173" width="80" height="15" rx="2" fill="#1a1a1b" opacity="0.75"/>
+    <text x="496" y="184"
+          font-family="ui-monospace, 'SF Mono', Consolas, monospace"
+          font-size="11" fill="#FFD057" opacity="0.85" text-anchor="middle">codegen</text>
+  </g>
+
+  <!-- Peer label on horizontal arrow -->
+  <rect x="358" y="267" width="84" height="15" rx="2" fill="#1a1a1b" opacity="0.75"/>
+  <text x="400" y="278"
+        font-family="ui-monospace, 'SF Mono', Consolas, monospace"
+        font-size="11" fill="#666" text-anchor="middle">peer ↔ peer</text>
+
   <!-- Spec box -->
   <rect x="310" y="76" width="180" height="58" rx="10"
         fill="#191508" stroke="#FFD057" stroke-width="1.5"/>
-  <text x="400" y="115"
+  <text x="400" y="110"
         font-family="ui-monospace, 'SF Mono', Consolas, monospace"
         font-size="24" font-weight="600" fill="#FFD057" text-anchor="middle">spec</text>
 
   <!-- Swift peer -->
   <circle cx="185" cy="285" r="75" fill="#180d07" stroke="#FA7343" stroke-width="1.5"/>
-  <text x="185" y="294"
+  <text x="185" y="281"
         font-family="ui-monospace, 'SF Mono', Consolas, monospace"
-        font-size="24" font-weight="600" fill="#FA7343" text-anchor="middle">Swift</text>
+        font-size="22" font-weight="600" fill="#FA7343" text-anchor="middle">Swift</text>
+  <text x="185" y="299"
+        font-family="ui-monospace, 'SF Mono', Consolas, monospace"
+        font-size="11" fill="#FA7343" opacity="0.6" text-anchor="middle">iOS · macOS</text>
 
   <!-- JS peer -->
   <circle cx="615" cy="285" r="75" fill="#18180a" stroke="#F7DF1E" stroke-width="1.5"/>
-  <text x="615" y="294"
+  <text x="615" y="281"
         font-family="ui-monospace, 'SF Mono', Consolas, monospace"
-        font-size="24" font-weight="600" fill="#F7DF1E" text-anchor="middle">JS</text>
+        font-size="22" font-weight="600" fill="#F7DF1E" text-anchor="middle">JS</text>
+  <text x="615" y="299"
+        font-family="ui-monospace, 'SF Mono', Consolas, monospace"
+        font-size="11" fill="#F7DF1E" opacity="0.6" text-anchor="middle">Node.js · Browser</text>
 </svg>
