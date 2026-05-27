@@ -179,7 +179,9 @@
 
       <article>
         <h1>Swift peers in the bare RPC ecosystem</h1>
-        <p class="meta">May 21, 2026 &middot; Open Source</p>
+        <p class="meta">May 21, 2026 &middot; Open Source &middot; <em>edited May 27, 2026</em></p>
+
+        <p>HRPC is a typed, schema-driven RPC protocol in the Holepunch ecosystem — you define the interface once, and the generator produces a peer class with typed methods and binary codecs for every handler. If you're a Swift developer new to the stack: it's conceptually similar to gRPC, but built on compact peer-to-peer primitives instead of HTTP/2.</p>
 
         <p>
           If you're building on hrpc today, your JavaScript peers are generated from the spec. Your Swift peers are written by hand. Every type, every codec, every command ID — maintained separately, drifting a little further from the canonical schema with each change. Update the spec and your JS peer updates automatically. Your Swift peer needs a manual edit, in the right place, for every field, every handler, every time.
@@ -346,17 +348,22 @@ await peer.receive(data)</code></pre>
 
         <h2>What this opens up</h2>
 
-        <p><strong>Clean separation of concerns in iOS and macOS apps.</strong> Run your p2p networking stack as a <a href="https://github.com/holepunchto/bare-kit" target="_blank" rel="noopener">bare-kit</a> worklet — the entire Holepunch ecosystem in JS, where it lives — and write your UI and business logic in native Swift. hrpc-swift bridges the two: the same spec that defines your worklet's interface generates the Swift types and RPC methods automatically. The worklet owns the network; Swift owns the experience.</p>
+        <p><strong>Clean separation of concerns in iOS and macOS apps.</strong> Run your p2p networking stack as a <a href="https://github.com/holepunchto/bare-kit" target="_blank" rel="noopener">bare-kit</a> worklet — the entire Holepunch ecosystem in JS, where it lives — and write your UI and business logic in native Swift. hrpc-swift bridges the two: the same spec that defines your worklet's interface generates the Swift types and RPC methods automatically. The worklet owns the network; Swift owns the experience. The separation matters because the Holepunch networking stack is JavaScript-native — keeping it there means every protocol update and ecosystem improvement flows in without rewriting native extensions. Your Swift code stays clean: it makes typed RPC calls to the worklet instead of touching raw sockets, DHT internals, or binary framing.</p>
 
-        <div class="diagram">Swift (UI + business logic)
-    ↑↓  hrpc-swift over bare-kit IPC
-Bare worklet (Hyperswarm, HyperDHT, all p2p networking in JS)
-    ↑↓
-The network</div>
+        <div class="mermaid">
+%%{init: {'theme': 'dark'}}%%
+flowchart TB
+    swift["Swift\nUI + business logic"]
+    worklet["Bare worklet\nHyperswarm · HyperDHT · all p2p networking in JS"]
+    network["The network"]
+
+    swift <-->|"hrpc-swift over bare-kit IPC"| worklet
+    worklet <--> network
+        </div>
 
         <p><strong>Swift devices as full peers.</strong> An iPhone or Mac is no longer bolted on the side — it's a node. It can register handlers, open streams, push events, and participate in duplex exchanges with any other peer in the network.</p>
 
-        <p><strong>One spec, every platform.</strong> Hyperschema already targets JS. It now targets Swift too. Add a handler, regenerate, and both sides update. Rename a field and the Swift compiler tells you everywhere that needs fixing. The spec is the single source of truth for the entire network.</p>
+        <p><strong>One spec, every platform.</strong> Hyperschema already targets JS. It now targets Swift too. Add a handler, regenerate, and both sides update. Rename a field and the Swift compiler tells you everywhere that needs fixing. The spec is the single source of truth for the entire network. Schema evolution follows compact-encoding's additive rules — new fields appended to a struct decode transparently on older peers, which ignore fields they don't recognise. Renaming or reordering fields is a breaking change; bump the schema version and codegen regenerates a consistent type set for JS and Swift in one pass.</p>
 
         <hr />
 
@@ -364,10 +371,12 @@ The network</div>
 
         <p>All four packages are on GitHub under <code>holepunchto</code>. A complete runnable example — schema definition, codegen, two Swift peers over an in-memory pipe — lives in <a href="https://github.com/holepunchto/hrpc-swift/tree/main/example" target="_blank" rel="noopener">hrpc-swift/example</a>.</p>
 
-        <p>If you're building something on top of this, we'd like to hear about it. File issues, open PRs, or just show us what you make.</p>
+        <p>If you're building something on top of this, we'd like to hear about it. <a href="https://github.com/holepunchto/hrpc-swift/issues/new" target="_blank" rel="noopener">Open an issue</a> or <a href="https://github.com/holepunchto/hrpc-swift/pulls" target="_blank" rel="noopener">send a PR</a> on hrpc-swift — or do the same on any of the four packages. We're watching.</p>
       </article>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
   </body>
 </html>
