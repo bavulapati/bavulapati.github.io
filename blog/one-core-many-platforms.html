@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A completely native Mac and iPhone app that syncs peer-to-peer with no server - and the single shared core behind it. Bare does the P2P and gets out of the way." />
+    <meta property="og:title" content="One core, many platforms - Bala Avulapati" />
+    <meta property="og:description" content="A completely native Mac and iPhone app that syncs peer-to-peer with no server - and the single shared core behind it. Bare does the P2P and gets out of the way." />
+    <meta property="og:image" content="https://bavulapati.com/assets/images/blog-one-core.png" />
+    <title>One core, many platforms - Bala Avulapati</title>
+    <link rel="shortcut icon" href="../assets/images/letter.png" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+    <style>
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.8;
+        background-color: hsl(240, 2%, 12%);
+        color: hsl(0, 0%, 84%);
+      }
+
+      a { color: hsl(45, 100%, 72%); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid hsl(0, 0%, 22%);
+        padding: 20px 0;
+        margin-bottom: 48px;
+      }
+
+      header a {
+        font-size: 13px;
+        color: hsl(0, 0%, 60%);
+        text-decoration: none;
+      }
+
+      header a:hover { color: hsl(45, 100%, 72%); }
+
+      .back-link { font-size: 13px; }
+
+      .contact-links {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .contact-links a {
+        display: flex;
+        align-items: center;
+        color: hsl(0, 0%, 50%);
+        transition: color 0.25s ease;
+      }
+
+      .contact-links a:hover { color: hsl(45, 100%, 72%); }
+
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 40px 24px 80px;
+      }
+
+      h1 {
+        font-size: 36px;
+        font-weight: 600;
+        color: hsl(0, 0%, 98%);
+        line-height: 1.3;
+        margin-bottom: 12px;
+      }
+
+      .meta {
+        font-size: 13px;
+        color: hsl(0, 0%, 60%);
+        margin-bottom: 40px;
+      }
+
+      h2 {
+        font-size: 22px;
+        font-weight: 600;
+        color: hsl(0, 0%, 98%);
+        margin: 48px 0 16px;
+      }
+
+      p { margin-bottom: 16px; }
+
+      ul, ol {
+        padding-left: 24px;
+        margin-bottom: 16px;
+      }
+
+      li { margin-bottom: 6px; }
+
+      strong { color: hsl(0, 0%, 98%); font-weight: 600; }
+
+      code {
+        font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+        font-size: 13px;
+        background: hsl(240, 1%, 17%);
+        border: 1px solid hsl(0, 0%, 22%);
+        border-radius: 4px;
+        padding: 1px 5px;
+        color: hsl(45, 100%, 72%);
+      }
+
+      pre {
+        background: hsl(240, 1%, 17%);
+        border: 1px solid hsl(0, 0%, 22%);
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        overflow-x: auto;
+      }
+
+      pre code {
+        background: none;
+        border: none;
+        padding: 0;
+        color: hsl(0, 0%, 84%);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      hr {
+        border: none;
+        border-top: 1px solid hsl(0, 0%, 22%);
+        margin: 48px 0;
+      }
+
+      .hljs { background: transparent; padding: 0; }
+
+      figure {
+        margin: 24px 0;
+      }
+
+      figure img, figure video {
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid hsl(0, 0%, 22%);
+        display: block;
+      }
+
+      figcaption {
+        font-size: 13px;
+        color: hsl(0, 0%, 60%);
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .diagram {
+        background: hsl(240, 1%, 17%);
+        border: 1px solid hsl(0, 0%, 22%);
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+        font-size: 15px;
+        line-height: 1.7;
+        white-space: pre;
+        color: hsl(0, 0%, 84%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html#blog" class="back-link">&larr; Back to blog</a>
+        <nav class="contact-links">
+          <a href="mailto:ba@bavulapati.com" title="Email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+          </a>
+          <a href="https://github.com/bavulapati" target="_blank" rel="noopener" title="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/bavulapati" target="_blank" rel="noopener" title="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+        </nav>
+      </header>
+
+      <article>
+        <h1>One core, many platforms</h1>
+        <p class="meta">June 15, 2026 &middot; Open Source</p>
+
+        <p>Flip a switch in a Mac app, and it flips on an iPhone next to it. No server, no account, no sign-in. The two apps found each other over a distributed hash table and they talk directly, device to device, end-to-end encrypted.</p>
+
+        <p>Both are completely native - a SwiftUI app on macOS, a SwiftUI app on iOS. The only unusual thing about them is that they are peers in a real peer-to-peer network, and you would never guess it from the Swift. The networking runs inside <a href="https://github.com/holepunchto/bare" target="_blank" rel="noopener">Bare</a>, and then it gets out of your way.</p>
+
+        <figure>
+          <video src="../assets/images/blog-one-core-sync.mp4" poster="../assets/images/blog-one-core-sync-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Flipping the shared switch in the macOS app and the iOS app; each one follows the other over a peer-to-peer network">
+            <img src="../assets/images/blog-one-core.png" alt="The same switch, on in a macOS app and an iOS app side by side" loading="lazy" />
+          </video>
+          <figcaption>Flip it in either app and the other follows - <a href="https://github.com/holepunchto/bare-macos" target="_blank" rel="noopener">bare-macos</a> and <a href="https://github.com/holepunchto/bare-ios" target="_blank" rel="noopener">bare-ios</a> - synced over a peer-to-peer network with nothing in between.</figcaption>
+        </figure>
+
+        <hr />
+
+        <h2>It's just SwiftUI</h2>
+
+        <p>Here is the whole interface. A toggle bound to a piece of state:</p>
+
+        <pre><code class="language-swift">Toggle("Shared switch", isOn: Binding(
+  get: { model.on },
+  set: { model.setOn($0) }
+))</code></pre>
+
+        <p>And here is the model behind it. One published property for the switch, one method for when <em>you</em> flip it, one callback for when a <em>peer</em> flips it:</p>
+
+        <pre><code class="language-swift">@MainActor
+final class SyncModel: ObservableObject {
+  @Published var on = false
+
+  // You flipped it: tell the worklet, then take back the authoritative state.
+  func setOn(_ value: Bool) {
+    on = value
+    Task {
+      if let result = try? await rpc.setState(SwitchState(on: value)) {
+        on = result.on
+      }
+    }
+  }
+
+  // A peer flipped it: the worklet pushes the new state to us.
+  func onNewState(_ state: SwitchState) {
+    on = state.on
+  }
+}</code></pre>
+
+        <p>There is no <code>URLSession</code> here. No sockets, no DHT, no key management, no binary framing. <code>setOn</code> makes one typed call. <code>onNewState</code> arrives as one typed callback. The networking is somewhere else entirely - and that is the whole idea.</p>
+
+        <hr />
+
+        <h2>The peer-to-peer is a dependency you forget</h2>
+
+        <p>So where is the network? In a worklet. A Bare worklet is a small JavaScript runtime the app embeds and runs on its own thread, started by <a href="https://github.com/holepunchto/bare-kit" target="_blank" rel="noopener">bare-kit</a>. It runs the entire Holepunch peer-to-peer stack - <a href="https://github.com/holepunchto/hyperswarm" target="_blank" rel="noopener">Hyperswarm</a> for discovery, <a href="https://github.com/holepunchto/hyperdht" target="_blank" rel="noopener">HyperDHT</a> for routing, Noise for encryption - none of which the Swift side ever touches.</p>
+
+        <p>You add it as a dependency:</p>
+
+        <pre><code class="language-bash">npm install bare-switch-core</code></pre>
+
+        <p>point the packer at it, and Bare boots it. From Swift, the worklet is a black box with exactly one contact surface: a typed <a href="https://github.com/holepunchto/hrpc" target="_blank" rel="noopener">hrpc</a> interface, generated from the same schema that defines the JS side. That generation is what the <a href="swift-peers-in-the-bare-rpc-ecosystem.html">previous post</a> was about - <code>hrpc-swift</code> turns the schema into a Swift <code>HRPC</code> class, so the seam is typed methods instead of raw bytes.</p>
+
+        <p>Wiring the two together is a single delegate. It forwards outbound frames to the worklet's IPC stream and pumps inbound frames back into the engine:</p>
+
+        <pre><code class="language-swift">final class BareTransport: RPCDelegate {
+  // RPC -> worklet
+  func rpc(_ rpc: RPC, send data: Data) {
+    Task { try? await ipc.write(data: data) }
+  }
+
+  // worklet -> RPC
+  func readLoop(into hrpc: HRPC) {
+    Task {
+      for try await chunk in ipc {
+        await hrpc.receive(chunk)
+      }
+    }
+  }
+}</code></pre>
+
+        <p>That is the entire boundary. Below it, JavaScript and the network. Above it, Swift and the experience.</p>
+
+        <p>If you are curious what actually crosses the wire when you flip the switch: a single byte. The worklet broadcasts it to every connected peer and keeps the last one it sees.</p>
+
+        <pre><code class="language-javascript">broadcast: (on) =&gt; {
+  for (const connection of peers) connection.write(Switch.encode(on))
+}</code></pre>
+
+        <p>You never need to know that to ship the app. It is just nice that real peer-to-peer can start this small.</p>
+
+        <p>This split has a name at Holepunch: the <strong>Tether stack</strong>. A native shell for the UI, a typed RPC seam, and the business logic and runtime underneath. The switch app is a tiny, complete instance of it.</p>
+
+        <div class="mermaid">
+%%{init: {'theme': 'dark'}}%%
+flowchart TB
+    shell["Native shell - SwiftUI\nUI + app logic"]
+    worklet["Bare worklet\nHyperswarm, HyperDHT, Noise - all P2P in JS"]
+    network["The network"]
+
+    shell <-->|"typed hrpc over bare-kit IPC"| worklet
+    worklet <--> network
+        </div>
+
+        <hr />
+
+        <h2>Then they disagree</h2>
+
+        <p>Flip the Mac on. Put the iPhone offline and flip it off. Bring it back. The two do not converge - one is on, one is off, and whichever wrote last wins the next time they meet.</p>
+
+        <figure>
+          <img src="../assets/images/blog-one-core-diverged.png" alt="The macOS app on and the iOS app off after editing while disconnected" loading="lazy" />
+          <figcaption>Edit while apart and the switch diverges. Last writer wins - there is no merge.</figcaption>
+        </figure>
+
+        <p>This is not a bug we forgot to fix. The switch is a single last-writer-wins value, and a single value is exactly the wrong tool the moment two peers can edit while apart. Showing that plainly is the point: it is the line where you have outgrown "broadcast a byte" and need a real data structure.</p>
+
+        <hr />
+
+        <h2>Where the ecosystem begins</h2>
+
+        <p>That data structure is <a href="https://github.com/holepunchto/autobase" target="_blank" rel="noopener">Autobase</a>. It turns many peers' independent edits into one convergent log: each peer appends its own changes to its own <a href="https://github.com/holepunchto/hypercore" target="_blank" rel="noopener">Hypercore</a>, and every peer merges them deterministically into the same result. Where the switch diverges, Autobase converges.</p>
+
+        <p>I am not going to rebuild the switch on Autobase here - the point is the doorway, not the destination. The naive switch is the cheapest possible map of where the real ecosystem begins. bare-macos is a place to start reading, not a peer-to-peer framework.</p>
+
+        <hr />
+
+        <h2>One core, many platforms</h2>
+
+        <p>Two things never changed between the Mac app and the iPhone app: the worklet and the schema. Both apps embed the same <a href="https://github.com/holepunchto/bare-switch-core" target="_blank" rel="noopener">bare-switch-core</a>. The peer-to-peer is written once, in JavaScript, and runs unmodified inside every shell.</p>
+
+        <p>That is the part that scales. macOS and iOS ship today. Linux, Windows, and Android are the same shape: the core already runs anywhere Bare runs, so each new platform is a thin native shell plus codegen for that platform's language. Swift is done (<code>hrpc-swift</code>). C codegen is in progress, which opens C and C++ shells for desktop Linux and Windows. Kotlin codegen is planned for Android.</p>
+
+        <div class="mermaid">
+%%{init: {'theme': 'dark'}}%%
+flowchart TB
+    core["bare-switch-core\none worklet, one schema (JS)"]
+    macos["macOS shell\nSwift - today"]
+    ios["iOS shell\nSwift - today"]
+    linux["Linux shell\nC / C++ - next"]
+    windows["Windows shell\nC / C++ - next"]
+    android["Android shell\nKotlin - planned"]
+
+    core --> macos
+    core --> ios
+    core --> linux
+    core --> windows
+    core --> android
+        </div>
+
+        <p>One core, written once. Many shells, each native to its platform. That is what "one stack, every platform" means in practice, and it is rolling out now.</p>
+
+        <hr />
+
+        <h2>Try it</h2>
+
+        <p>Everything here is open source under <code>holepunchto</code>: the shared core in <a href="https://github.com/holepunchto/bare-switch-core" target="_blank" rel="noopener">bare-switch-core</a>, and the two shells in <a href="https://github.com/holepunchto/bare-macos" target="_blank" rel="noopener">bare-macos</a> and <a href="https://github.com/holepunchto/bare-ios" target="_blank" rel="noopener">bare-ios</a>. Each shell is built with <code>xcodegen generate</code> then <code>xcodebuild</code>; the READMEs have the one-time setup.</p>
+
+        <p>Launch either app twice - or one of each - and watch the peer count climb and the switch sync. Then flip them apart and watch them disagree, and you will know exactly which part of the ecosystem to read next.</p>
+
+        <p>If you are building something on top of this, I would like to hear about it. <a href="https://github.com/holepunchto/bare-macos/issues/new" target="_blank" rel="noopener">Open an issue</a> or send a PR on any of the repos.</p>
+      </article>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+  </body>
+</html>
