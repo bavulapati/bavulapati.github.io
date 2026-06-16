@@ -256,17 +256,6 @@ final class SyncModel: ObservableObject {
 
         <p>This split has a name at Holepunch: the <a href="https://gist.github.com/mafintosh/77a39b92157a1899e098353cec7d20ab" target="_blank" rel="noopener"><strong>Tether stack</strong></a>. A native shell for the UI, a typed RPC seam, and the business logic and runtime underneath. The switch app is a tiny, complete instance of it - and because the core is just a dependency, the same one drops into any native shell.</p>
 
-        <div class="mermaid">
-%%{init: {'theme': 'dark'}}%%
-flowchart TB
-    shell["Native shell - SwiftUI\nUI + app logic"]
-    worklet["Bare worklet\nHyperswarm, HyperDHT, Noise - all P2P in JS"]
-    network["The network"]
-
-    shell <-->|"typed hrpc over bare-kit IPC"| worklet
-    worklet <--> network
-        </div>
-
         <hr />
 
         <h2>Then they disagree</h2>
@@ -290,7 +279,7 @@ flowchart TB
 
         <p>Two things never changed between the Mac app and the iPhone app: the worklet and the schema. Both apps embed the same <a href="https://github.com/holepunchto/bare-switch-core" target="_blank" rel="noopener">bare-switch-core</a>. The peer-to-peer is written once, in JavaScript, and runs unmodified inside every shell.</p>
 
-        <p>That is the part that scales. macOS and iOS ship today. Linux, Windows, and Android are the same shape: the core already runs anywhere Bare runs, so each new platform is a thin native shell plus codegen for that platform's language. Swift is done (<a href="https://github.com/holepunchto/hrpc-swift" target="_blank" rel="noopener"><code>hrpc-swift</code></a>). C codegen is in progress, which opens C and C++ shells for desktop Linux and Windows. Kotlin codegen is planned for Android.</p>
+        <p>That is the part that scales. macOS and iOS ship today, both on Swift (<a href="https://github.com/holepunchto/hrpc-swift" target="_blank" rel="noopener"><code>hrpc-swift</code></a>); the core already runs anywhere Bare runs, so each new platform is just a thin native shell plus codegen for its language - C for Linux and Windows is in progress, Kotlin for Android is planned.</p>
 
         <p>One core, written once. Many shells, each native to its platform.</p>
 
@@ -307,8 +296,6 @@ flowchart TB
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.15.0/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
     <script>
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
         for (const v of document.querySelectorAll('video[autoplay]')) {
