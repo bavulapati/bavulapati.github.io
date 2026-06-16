@@ -190,7 +190,7 @@
         <h1>One core, many platforms</h1>
         <p class="meta">June 15, 2026 &middot; Open Source</p>
 
-        <p>Flip a switch in a Mac app, and it flips on an iPhone next to it. No server, no account, no sign-in. The two apps found each other over a distributed hash table and they talk directly, device to device, end-to-end encrypted.</p>
+        <p>Flip a switch in a Mac app, and it flips on an iPhone next to it. No server, no account, no sign-in. They found each other and connected directly - device to device, end-to-end encrypted - over a distributed hash table.</p>
 
         <p>Both are completely native - a SwiftUI app on macOS, a SwiftUI app on iOS. The only unusual thing about them is that they are peers in a real peer-to-peer network, and you would never guess it from the Swift. The networking runs inside <a href="https://github.com/holepunchto/bare" target="_blank" rel="noopener">Bare</a>, and then it gets out of your way.</p>
 
@@ -246,7 +246,7 @@ final class SyncModel: ObservableObject {
 
         <pre><code class="language-bash">npm install bare-switch-core</code></pre>
 
-        <p>point <a href="https://github.com/holepunchto/bare-pack" target="_blank" rel="noopener">bare-pack</a> at it, and Bare boots it. From Swift, the worklet is a black box with exactly one contact surface: a typed <a href="https://github.com/holepunchto/hrpc" target="_blank" rel="noopener">hrpc</a> interface, generated from the same schema that defines the JS side. That generation is what the <a href="swift-peers-in-the-bare-rpc-ecosystem.html">previous post</a> was about - <a href="https://github.com/holepunchto/hrpc-swift" target="_blank" rel="noopener"><code>hrpc-swift</code></a> turns the schema into a Swift <code>HRPC</code> class, so the seam is typed methods instead of raw bytes.</p>
+        <p>Then point <a href="https://github.com/holepunchto/bare-pack" target="_blank" rel="noopener">bare-pack</a> at it, and Bare boots it. From Swift, the worklet is a black box with exactly one contact surface: a typed <a href="https://github.com/holepunchto/hrpc" target="_blank" rel="noopener">hrpc</a> interface, generated from the same schema that defines the JS side. That generation is what the <a href="swift-peers-in-the-bare-rpc-ecosystem.html">previous post</a> was about - <a href="https://github.com/holepunchto/hrpc-swift" target="_blank" rel="noopener"><code>hrpc-swift</code></a> turns the schema into a Swift <code>HRPC</code> class, so the seam is typed methods instead of raw bytes.</p>
 
         <p>Wiring the two together is a single delegate. It forwards outbound frames to the worklet's IPC stream and pumps inbound frames back into the engine:</p>
 
@@ -276,7 +276,7 @@ final class SyncModel: ObservableObject {
 
         <p>You never need to know that to ship the app. It is just nice that real peer-to-peer can start this small.</p>
 
-        <p>This split has a name at Holepunch: the <strong>Tether stack</strong>. A native shell for the UI, a typed RPC seam, and the business logic and runtime underneath. The switch app is a tiny, complete instance of it.</p>
+        <p>This split has a name at Holepunch: the <a href="https://gist.github.com/mafintosh/77a39b92157a1899e098353cec7d20ab" target="_blank" rel="noopener"><strong>Tether stack</strong></a>. A native shell for the UI, a typed RPC seam, and the business logic and runtime underneath. The switch app is a tiny, complete instance of it.</p>
 
         <div class="mermaid">
 %%{init: {'theme': 'dark'}}%%
@@ -293,7 +293,7 @@ flowchart TB
 
         <h2>Then they disagree</h2>
 
-        <p>Flip the Mac on. Put the iPhone offline and flip it off. Bring it back. The two do not converge - one is on, one is off, and whichever wrote last wins the next time they meet.</p>
+        <p>Flip the Mac on. Put the iPhone offline and flip it off. Bring it back. The two never merge - one is on, one is off, and whichever wrote last wins the next time they meet.</p>
 
         <figure>
           <img src="../assets/images/blog-one-core-diverged.png" alt="The macOS app on and the iOS app off after editing while disconnected" loading="lazy" />
@@ -308,7 +308,7 @@ flowchart TB
 
         <p>That data structure is <a href="https://github.com/holepunchto/autobase" target="_blank" rel="noopener">Autobase</a>. It turns many peers' independent edits into one convergent log: each peer appends its own changes to its own <a href="https://github.com/holepunchto/hypercore" target="_blank" rel="noopener">Hypercore</a>, and every peer merges them deterministically into the same result. Where the switch diverges, Autobase converges.</p>
 
-        <p>I am not going to rebuild the switch on Autobase here - the point is the doorway, not the destination. The naive switch is the cheapest possible map of where the real ecosystem begins. bare-macos is a place to start reading, not a peer-to-peer framework.</p>
+        <p>I am not going to rebuild the switch on Autobase here - the point is the doorway, not the destination. The naive switch is the cheapest possible map of where the real ecosystem begins. Treat bare-macos as a place to start reading, not a peer-to-peer framework.</p>
 
         <hr />
 
