@@ -8,6 +8,10 @@
     <meta property="og:title" content="One core, many platforms - Bala Avulapati" />
     <meta property="og:description" content="A completely native Mac and iPhone app that syncs peer-to-peer with no server - and the single shared core behind it. Bare does the P2P and gets out of the way." />
     <meta property="og:image" content="https://bavulapati.com/assets/images/blog-one-core.png" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://bavulapati.com/blog/one-core-many-platforms.html" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://bavulapati.com/blog/one-core-many-platforms.html" />
     <title>One core, many platforms - Bala Avulapati</title>
     <link rel="shortcut icon" href="../assets/images/letter.png" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -154,19 +158,6 @@
         text-align: center;
         margin-top: 10px;
       }
-
-      .diagram {
-        background: hsl(240, 1%, 17%);
-        border: 1px solid hsl(0, 0%, 22%);
-        border-radius: 8px;
-        padding: 20px;
-        margin: 20px 0;
-        font-family: "SF Mono", "Fira Code", "Consolas", monospace;
-        font-size: 15px;
-        line-height: 1.7;
-        white-space: pre;
-        color: hsl(0, 0%, 84%);
-      }
     </style>
   </head>
   <body>
@@ -204,7 +195,7 @@
         <p>Both are completely native - a SwiftUI app on macOS, a SwiftUI app on iOS. The only unusual thing about them is that they are peers in a real peer-to-peer network, and you would never guess it from the Swift. The networking runs inside <a href="https://github.com/holepunchto/bare" target="_blank" rel="noopener">Bare</a>, and then it gets out of your way.</p>
 
         <figure>
-          <video src="../assets/images/blog-one-core-sync.mp4" poster="../assets/images/blog-one-core-sync-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Flipping the shared switch in the macOS app and the iOS app; each one follows the other over a peer-to-peer network">
+          <video src="../assets/images/blog-one-core-sync.mp4" poster="../assets/images/blog-one-core-sync-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Shared switch syncing between the macOS and iOS apps">
             <img src="../assets/images/blog-one-core.png" alt="The same switch, on in a macOS app and an iOS app side by side" loading="lazy" />
           </video>
           <figcaption>Flip it in either app and the other follows - <a href="https://github.com/holepunchto/bare-macos" target="_blank" rel="noopener">bare-macos</a> and <a href="https://github.com/holepunchto/bare-ios" target="_blank" rel="noopener">bare-ios</a> - synced over a peer-to-peer network with nothing in between.</figcaption>
@@ -255,7 +246,7 @@ final class SyncModel: ObservableObject {
 
         <pre><code class="language-bash">npm install bare-switch-core</code></pre>
 
-        <p>point the packer at it, and Bare boots it. From Swift, the worklet is a black box with exactly one contact surface: a typed <a href="https://github.com/holepunchto/hrpc" target="_blank" rel="noopener">hrpc</a> interface, generated from the same schema that defines the JS side. That generation is what the <a href="swift-peers-in-the-bare-rpc-ecosystem.html">previous post</a> was about - <code>hrpc-swift</code> turns the schema into a Swift <code>HRPC</code> class, so the seam is typed methods instead of raw bytes.</p>
+        <p>point <a href="https://github.com/holepunchto/bare-pack" target="_blank" rel="noopener">bare-pack</a> at it, and Bare boots it. From Swift, the worklet is a black box with exactly one contact surface: a typed <a href="https://github.com/holepunchto/hrpc" target="_blank" rel="noopener">hrpc</a> interface, generated from the same schema that defines the JS side. That generation is what the <a href="swift-peers-in-the-bare-rpc-ecosystem.html">previous post</a> was about - <a href="https://github.com/holepunchto/hrpc-swift" target="_blank" rel="noopener"><code>hrpc-swift</code></a> turns the schema into a Swift <code>HRPC</code> class, so the seam is typed methods instead of raw bytes.</p>
 
         <p>Wiring the two together is a single delegate. It forwards outbound frames to the worklet's IPC stream and pumps inbound frames back into the engine:</p>
 
@@ -325,7 +316,7 @@ flowchart TB
 
         <p>Two things never changed between the Mac app and the iPhone app: the worklet and the schema. Both apps embed the same <a href="https://github.com/holepunchto/bare-switch-core" target="_blank" rel="noopener">bare-switch-core</a>. The peer-to-peer is written once, in JavaScript, and runs unmodified inside every shell.</p>
 
-        <p>That is the part that scales. macOS and iOS ship today. Linux, Windows, and Android are the same shape: the core already runs anywhere Bare runs, so each new platform is a thin native shell plus codegen for that platform's language. Swift is done (<code>hrpc-swift</code>). C codegen is in progress, which opens C and C++ shells for desktop Linux and Windows. Kotlin codegen is planned for Android.</p>
+        <p>That is the part that scales. macOS and iOS ship today. Linux, Windows, and Android are the same shape: the core already runs anywhere Bare runs, so each new platform is a thin native shell plus codegen for that platform's language. Swift is done (<a href="https://github.com/holepunchto/hrpc-swift" target="_blank" rel="noopener"><code>hrpc-swift</code></a>). C codegen is in progress, which opens C and C++ shells for desktop Linux and Windows. Kotlin codegen is planned for Android.</p>
 
         <div class="mermaid">
 %%{init: {'theme': 'dark'}}%%
@@ -350,7 +341,7 @@ flowchart TB
 
         <h2>Try it</h2>
 
-        <p>Everything here is open source under <code>holepunchto</code>: the shared core in <a href="https://github.com/holepunchto/bare-switch-core" target="_blank" rel="noopener">bare-switch-core</a>, and the two shells in <a href="https://github.com/holepunchto/bare-macos" target="_blank" rel="noopener">bare-macos</a> and <a href="https://github.com/holepunchto/bare-ios" target="_blank" rel="noopener">bare-ios</a>. Each shell is built with <code>xcodegen generate</code> then <code>xcodebuild</code>; the READMEs have the one-time setup.</p>
+        <p>Everything here is open source under <a href="https://github.com/holepunchto" target="_blank" rel="noopener"><code>holepunchto</code></a>: the shared core in <a href="https://github.com/holepunchto/bare-switch-core" target="_blank" rel="noopener">bare-switch-core</a>, and the two shells in <a href="https://github.com/holepunchto/bare-macos" target="_blank" rel="noopener">bare-macos</a> and <a href="https://github.com/holepunchto/bare-ios" target="_blank" rel="noopener">bare-ios</a>. Each shell is built with <code>xcodegen generate</code> then <code>xcodebuild</code>; the READMEs have the one-time setup.</p>
 
         <p>Launch either app twice - or one of each - and watch the peer count climb and the switch sync. Then flip them apart and watch them disagree, and you will know exactly which part of the ecosystem to read next.</p>
 
@@ -359,7 +350,15 @@ flowchart TB
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.15.0/dist/mermaid.min.js"></script>
     <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+    <script>
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        for (const v of document.querySelectorAll('video[autoplay]')) {
+          v.removeAttribute('autoplay');
+          v.pause();
+        }
+      }
+    </script>
   </body>
 </html>
