@@ -256,6 +256,17 @@ final class SyncModel: ObservableObject {
 
         <p>This split has a name at Holepunch: the <a href="https://gist.github.com/mafintosh/77a39b92157a1899e098353cec7d20ab" target="_blank" rel="noopener"><strong>Tether stack</strong></a>. A native shell for the UI, a typed RPC seam, and the business logic and runtime underneath. The switch app is a tiny, complete instance of it - and because the core is just a dependency, the same one drops into any native shell.</p>
 
+        <div class="mermaid">
+%%{init: {'theme': 'dark'}}%%
+flowchart TB
+    shell["Native shell - SwiftUI\nUI + app logic"]
+    worklet["Bare worklet\nHyperswarm, HyperDHT, Noise - all P2P in JS"]
+    network["The network"]
+
+    shell <-->|"typed hrpc over bare-kit IPC"| worklet
+    worklet <--> network
+        </div>
+
         <hr />
 
         <h2>Then they disagree</h2>
@@ -281,24 +292,7 @@ final class SyncModel: ObservableObject {
 
         <p>That is the part that scales. macOS and iOS ship today. Linux, Windows, and Android are the same shape: the core already runs anywhere Bare runs, so each new platform is a thin native shell plus codegen for that platform's language. Swift is done (<a href="https://github.com/holepunchto/hrpc-swift" target="_blank" rel="noopener"><code>hrpc-swift</code></a>). C codegen is in progress, which opens C and C++ shells for desktop Linux and Windows. Kotlin codegen is planned for Android.</p>
 
-        <div class="mermaid">
-%%{init: {'theme': 'dark'}}%%
-flowchart TB
-    core["bare-switch-core\none worklet, one schema (JS)"]
-    macos["macOS shell\nSwift - today"]
-    ios["iOS shell\nSwift - today"]
-    linux["Linux shell\nC / C++ - next"]
-    windows["Windows shell\nC / C++ - next"]
-    android["Android shell\nKotlin - planned"]
-
-    core --> macos
-    core --> ios
-    core --> linux
-    core --> windows
-    core --> android
-        </div>
-
-        <p>One core, written once. Many shells, each native to its platform. That is what "one stack, every platform" means in practice - macOS and iOS today, and a thin shell plus codegen away for each of the rest.</p>
+        <p>One core, written once. Many shells, each native to its platform.</p>
 
         <hr />
 
