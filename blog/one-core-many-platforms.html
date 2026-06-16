@@ -242,31 +242,9 @@ final class SyncModel: ObservableObject {
 
         <p>So where is the network? In a worklet. A Bare worklet is a small JavaScript runtime the app embeds and runs on its own thread, started by <a href="https://github.com/holepunchto/bare-kit" target="_blank" rel="noopener">bare-kit</a>. It runs the entire Holepunch peer-to-peer stack - <a href="https://github.com/holepunchto/hyperswarm" target="_blank" rel="noopener">Hyperswarm</a> for discovery, <a href="https://github.com/holepunchto/hyperdht" target="_blank" rel="noopener">HyperDHT</a> for routing, Noise for encryption - none of which the Swift side ever touches.</p>
 
-        <p>You add it as a dependency:</p>
+        <p>You add it as a dependency, point <a href="https://github.com/holepunchto/bare-pack" target="_blank" rel="noopener">bare-pack</a> at it, and Bare boots it. From Swift, the worklet is a black box with exactly one contact surface: a typed <a href="https://github.com/holepunchto/hrpc" target="_blank" rel="noopener">hrpc</a> interface, generated from the same schema that defines the JS side. That generation is what the <a href="swift-peers-in-the-bare-rpc-ecosystem.html">previous post</a> was about - <a href="https://github.com/holepunchto/hrpc-swift" target="_blank" rel="noopener"><code>hrpc-swift</code></a> turns the schema into a Swift <code>HRPC</code> class, so the seam is typed methods instead of raw bytes.</p>
 
-        <pre><code class="language-bash">npm install bare-switch-core</code></pre>
-
-        <p>Then point <a href="https://github.com/holepunchto/bare-pack" target="_blank" rel="noopener">bare-pack</a> at it, and Bare boots it. From Swift, the worklet is a black box with exactly one contact surface: a typed <a href="https://github.com/holepunchto/hrpc" target="_blank" rel="noopener">hrpc</a> interface, generated from the same schema that defines the JS side. That generation is what the <a href="swift-peers-in-the-bare-rpc-ecosystem.html">previous post</a> was about - <a href="https://github.com/holepunchto/hrpc-swift" target="_blank" rel="noopener"><code>hrpc-swift</code></a> turns the schema into a Swift <code>HRPC</code> class, so the seam is typed methods instead of raw bytes.</p>
-
-        <p>Wiring the two together is a single delegate. It forwards outbound frames to the worklet's IPC stream and pumps inbound frames back into the engine:</p>
-
-        <pre><code class="language-swift">final class BareTransport: RPCDelegate {
-  // RPC -> worklet
-  func rpc(_ rpc: RPC, send data: Data) {
-    Task { try? await ipc.write(data: data) }
-  }
-
-  // worklet -> RPC
-  func readLoop(into hrpc: HRPC) {
-    Task {
-      for try await chunk in ipc {
-        await hrpc.receive(chunk)
-      }
-    }
-  }
-}</code></pre>
-
-        <p>That is the entire boundary. Below it, JavaScript and the network. Above it, Swift and the experience.</p>
+        <p>Wiring the two together is a single delegate: outbound calls go to the worklet's IPC stream, inbound frames come back into the engine. That is the entire boundary. Below it, JavaScript and the network. Above it, Swift and the experience.</p>
 
         <p>If you are curious what actually crosses the wire when you flip the switch: a single byte. The worklet broadcasts it to every connected peer and keeps the last one it sees.</p>
 
@@ -274,24 +252,15 @@ final class SyncModel: ObservableObject {
   for (const connection of peers) connection.write(Switch.encode(on))
 }</code></pre>
 
-        <p>You never need to know that to ship the app. It is just nice that real peer-to-peer can start this small.</p>
+        <p>It is just nice that real peer-to-peer can start this small.</p>
 
-        <p>This split has a name at Holepunch: the <a href="https://gist.github.com/mafintosh/77a39b92157a1899e098353cec7d20ab" target="_blank" rel="noopener"><strong>Tether stack</strong></a>. A native shell for the UI, a typed RPC seam, and the business logic and runtime underneath. The switch app is a tiny, complete instance of it.</p>
-
-        <div class="mermaid">
-%%{init: {'theme': 'dark'}}%%
-flowchart TB
-    shell["Native shell - SwiftUI\nUI + app logic"]
-    worklet["Bare worklet\nHyperswarm, HyperDHT, Noise - all P2P in JS"]
-    network["The network"]
-
-    shell <-->|"typed hrpc over bare-kit IPC"| worklet
-    worklet <--> network
-        </div>
+        <p>This split has a name at Holepunch: the <a href="https://gist.github.com/mafintosh/77a39b92157a1899e098353cec7d20ab" target="_blank" rel="noopener"><strong>Tether stack</strong></a>. A native shell for the UI, a typed RPC seam, and the business logic and runtime underneath. The switch app is a tiny, complete instance of it - and because the core is just a dependency, the same one drops into any native shell.</p>
 
         <hr />
 
         <h2>Then they disagree</h2>
+
+        <p>That is the happy path. Now break it on purpose.</p>
 
         <p>Flip the Mac on. Put the iPhone offline and flip it off. Bring it back. The two never merge - one is on, one is off, and whichever wrote last wins the next time they meet.</p>
 
@@ -302,13 +271,7 @@ flowchart TB
 
         <p>This is not a bug we forgot to fix. The switch is a single last-writer-wins value, and a single value is exactly the wrong tool the moment two peers can edit while apart. Showing that plainly is the point: it is the line where you have outgrown "broadcast a byte" and need a real data structure.</p>
 
-        <hr />
-
-        <h2>Where the ecosystem begins</h2>
-
-        <p>That data structure is <a href="https://github.com/holepunchto/autobase" target="_blank" rel="noopener">Autobase</a>. It turns many peers' independent edits into one convergent log: each peer appends its own changes to its own <a href="https://github.com/holepunchto/hypercore" target="_blank" rel="noopener">Hypercore</a>, and every peer merges them deterministically into the same result. Where the switch diverges, Autobase converges.</p>
-
-        <p>I am not going to rebuild the switch on Autobase here - the point is the doorway, not the destination. The naive switch is the cheapest possible map of where the real ecosystem begins. Treat bare-macos as a place to start reading, not a peer-to-peer framework.</p>
+        <p>That data structure is <a href="https://github.com/holepunchto/autobase" target="_blank" rel="noopener">Autobase</a>. Each peer appends its own edits to its own <a href="https://github.com/holepunchto/hypercore" target="_blank" rel="noopener">Hypercore</a>, and every peer merges them deterministically into the same result - where the switch diverges, Autobase converges. I am not rebuilding the switch on it here; the naive switch is just the cheapest map of where the real ecosystem begins, and bare-macos is a place to start reading, not a peer-to-peer framework.</p>
 
         <hr />
 
@@ -335,7 +298,7 @@ flowchart TB
     core --> android
         </div>
 
-        <p>One core, written once. Many shells, each native to its platform. That is what "one stack, every platform" means in practice, and it is rolling out now.</p>
+        <p>One core, written once. Many shells, each native to its platform. That is what "one stack, every platform" means in practice - macOS and iOS today, and a thin shell plus codegen away for each of the rest.</p>
 
         <hr />
 
