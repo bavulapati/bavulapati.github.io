@@ -129,12 +129,19 @@ li {
 }
 
 img,
-ion-icon,
+svg,
 a,
 button,
 time,
 span {
   display: block;
+}
+
+/* inline SVG icons inherit size from font-size and color from currentColor,
+   matching the icon-font behavior they replaced */
+svg {
+  width: 1em;
+  height: 1em;
 }
 
 button {
@@ -1456,7 +1463,7 @@ textarea.form-input::-webkit-resizer {
     font-size: var(--fs-8);
   }
 
-  .info_more-btn ion-icon {
+  .info_more-btn svg {
     display: none;
   }
 
