@@ -144,6 +144,12 @@ svg {
   height: 1em;
 }
 
+/* width/height attrs on images supply the aspect ratio for CLS; height:auto
+   keeps them from stretching when CSS sizes them by width */
+img {
+  height: auto;
+}
+
 button {
   font: inherit;
   background: none;
