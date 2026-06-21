@@ -287,6 +287,21 @@ article.active {
   border-radius: 3px;
 }
 
+/* terminal-style "whoami" greeting on the About heading */
+.article-title.is-terminal {
+  font-family: ui-monospace, "SF Mono", Menlo, "Liberation Mono", monospace;
+  text-transform: none;
+}
+
+.article-title.is-terminal::before {
+  content: "$ ";
+  color: var(--orange-yellow-crayola);
+}
+
+.article-title.is-terminal::after {
+  display: none;
+}
+
 .has-scrollbar::-webkit-scrollbar {
   width: 5px; /* for vertical scrollbar */
   height: 5px; /* for horizontal scrollbar */

@@ -232,7 +232,8 @@
 
         <article class="about active" data-page="about">
           <header>
-            <h2 class="h2 article-title">About me</h2>
+            <!-- aria-label is load-bearing: keeps the screen-reader name "About me" (without it AT reads "$ whoami") -->
+            <h2 class="h2 article-title is-terminal" aria-label="About me">whoami</h2>
           </header>
 
           <section class="about-text">
