@@ -8,7 +8,7 @@ A static personal portfolio site (bavulapati.com) with no build step, no bundler
 
 ## Previewing
 
-Open `index.html` directly in a browser — no server required. There is no `npm run dev` or equivalent.
+Open `index.html` directly in a browser - no server required. There is no `npm run dev` or equivalent.
 
 ## Structure
 
@@ -33,7 +33,7 @@ No npm packages. The only local scripts are `assets/js/script.js` and the vendor
 
 ## Meta files and CI
 
-- Each page sets `description`, Open Graph tags, `theme-color`, favicons, and an `apple-touch-icon`. `404.html` is a custom dark page.
+- Content pages (`index.html` and blog posts) set `description` and Open Graph tags; every page sets `theme-color`, favicons, and an `apple-touch-icon`. `404.html` is a custom dark page marked `noindex` (no `description`/OG).
 - `feed.xml` (Atom), `sitemap.xml`, and `robots.txt` live at the repo root - keep them in sync when adding posts (see below).
 - CI (`.github/workflows/checks.yml`) runs on every push: XML well-formedness (xmllint), link/asset checking (lychee), and HTML validation (html5validator against the W3C Nu validator).
 
@@ -43,7 +43,7 @@ Each post is a self-contained HTML file in `blog/` (e.g. `blog/one-core-many-pla
 
 - Inline `<style>` block copied from the prior post (dark theme, Poppins, `max-width: 720px` container). There is no shared blog stylesheet.
 - `<head>`: `description`, full Open Graph set (`og:title`, `og:description`, `og:image`, `og:type=article`, `og:url`), `twitter:card=summary_large_image`, `canonical`, and a `BlogPosting` JSON-LD block (headline matching `<title>`, `datePublished`/`dateModified`, author + publisher = Bala Avulapati). og:image is an absolute `https://bavulapati.com/...` URL and must be a static image (PNG), never a video.
-- Body: `<header>` with a back-link to `../index.html#blog` plus contact SVGs, then `<article>` with one `<h1>`, a `.meta` line (`Month D, YYYY · Category`), `<h2>` sections, and `<hr>` between them.
+- Body: `<header>` with a back-link to `../index.html#blog` plus contact SVGs, then `<article>` with one `<h1>`, a `.meta` line (`Month D, YYYY &middot; Category`), `<h2>` sections, and `<hr>` between them.
 - Code blocks use highlight.js (atom-one-dark) loaded from CDN; `<figure>` holds images or an autoplay/loop/muted/playsinline `<video>` with a `poster` and an `<img>` fallback inside. Include a `prefers-reduced-motion` guard script that strips `autoplay`. Avoid mermaid unless a diagram genuinely adds something the prose cannot - prose usually wins.
 - Prepend a card to the `blog-posts-list` in `index.html` (newest first), reusing an existing card's markup, with a banner SVG in `assets/images/` styled like `blog-hrpc-swift.svg` (dark, dotted bg, mono font).
 - Asset naming: `blog-<slug>.svg` (index banner), `blog-<slug>.png` (hero/og), plus any `-poster.jpg` / `.mp4` for video heroes.
@@ -53,4 +53,4 @@ Each post is a self-contained HTML file in `blog/` (e.g. `blog/one-core-many-pla
 
 ## Deployment
 
-Pushing to `main` triggers GitHub Pages to publish automatically. The custom domain `bavulapati.com` is configured in the `CNAME` file — do not delete or rename it.
+Pushing to `main` triggers GitHub Pages to publish automatically. The custom domain `bavulapati.com` is configured in the `CNAME` file - do not delete or rename it.
