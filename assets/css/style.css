@@ -565,8 +565,11 @@ main {
   margin-bottom: 15px;
 }
 
-/* gold links, matching the blog convention - obvious against light-gray body text */
+/* gold links, matching the blog convention - obvious against light-gray body
+   text. display:inline overrides the global "a { display: block }" so links
+   flow within the prose instead of each taking their own line. */
 .about-text a {
+  display: inline;
   color: var(--orange-yellow-crayola);
   text-decoration: none;
 }
@@ -576,9 +579,11 @@ main {
   text-decoration: underline;
 }
 
-/* keep each package name and its trailing comma together as one unit,
-   so hyphenated names never break mid-word and commas never orphan */
+/* keep each package name and its trailing comma together as one unit, so
+   hyphenated names never break mid-word and commas never orphan (also needs
+   display:inline to override the global "span { display: block }") */
 .about-text .nowrap {
+  display: inline;
   white-space: nowrap;
 }
 
