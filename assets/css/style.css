@@ -362,6 +362,14 @@ main {
 .avatar-box {
   background: var(--bg-gradient-onyx);
   border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 0 2px var(--orange-yellow-crayola), var(--shadow-1);
+}
+
+.avatar-box img {
+  display: block;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 
 .info-content .name {
