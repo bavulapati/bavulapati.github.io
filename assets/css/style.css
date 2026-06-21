@@ -565,6 +565,17 @@ main {
   margin-bottom: 15px;
 }
 
+/* gold links, matching the blog convention - obvious against light-gray body text */
+.about-text a {
+  color: var(--orange-yellow-crayola);
+  text-decoration: none;
+}
+
+.about-text a:hover,
+.about-text a:focus-visible {
+  text-decoration: underline;
+}
+
 /**
  * #service 
  */
