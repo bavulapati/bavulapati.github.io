@@ -288,10 +288,12 @@ article.active {
   border-radius: 3px;
 }
 
-/* terminal-style headings: the section titles ($ whoami, $ cat resume,
-   $ ls ~/blog) and the "what I'm doing" subheading ($ jobs) */
+/* terminal-style headings, two levels:
+   "$ " section titles ($ whoami / $ cat resume / $ ls ~/blog / $ jobs) and
+   "# " sub-section headings as shell comments (# Education / # Skills / ...) */
 .article-title.is-terminal,
-.service-title.is-terminal {
+.service-title.is-terminal,
+.is-comment {
   font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   font-weight: var(--fw-500);
   text-transform: none;
@@ -300,6 +302,11 @@ article.active {
 .article-title.is-terminal::before,
 .service-title.is-terminal::before {
   content: "$ ";
+  color: var(--orange-yellow-crayola);
+}
+
+.is-comment::before {
+  content: "# ";
   color: var(--orange-yellow-crayola);
 }
 
