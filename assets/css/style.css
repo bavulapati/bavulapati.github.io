@@ -288,13 +288,16 @@ article.active {
   border-radius: 3px;
 }
 
-/* terminal-style "whoami" greeting on the About heading */
-.article-title.is-terminal {
+/* terminal-style headings: the section titles ($ whoami, $ cat resume,
+   $ ls ~/blog) and the "what I'm doing" subheading ($ jobs) */
+.article-title.is-terminal,
+.service-title.is-terminal {
   font-family: ui-monospace, "SF Mono", Menlo, "Liberation Mono", monospace;
   text-transform: none;
 }
 
-.article-title.is-terminal::before {
+.article-title.is-terminal::before,
+.service-title.is-terminal::before {
   content: "$ ";
   color: var(--orange-yellow-crayola);
 }
