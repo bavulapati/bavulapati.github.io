@@ -288,13 +288,16 @@ article.active {
   border-radius: 3px;
 }
 
-/* terminal-style "whoami" greeting on the About heading */
-.article-title.is-terminal {
+/* terminal-style headings: the section titles ($ whoami, $ cat resume,
+   $ ls ~/blog) and the "what I'm doing" subheading ($ jobs) */
+.article-title.is-terminal,
+.service-title.is-terminal {
   font-family: ui-monospace, "SF Mono", Menlo, "Liberation Mono", monospace;
   text-transform: none;
 }
 
-.article-title.is-terminal::before {
+.article-title.is-terminal::before,
+.service-title.is-terminal::before {
   content: "$ ";
   color: var(--orange-yellow-crayola);
 }
@@ -560,6 +563,23 @@ main {
 
 .about-text p {
   margin-bottom: 15px;
+}
+
+/* gold links, matching the blog convention - obvious against light-gray body
+   text. display:inline overrides the global "a { display: block }" so links
+   flow within the prose instead of each taking their own line. */
+.about-text a,
+.service-item-text a {
+  display: inline;
+  color: var(--orange-yellow-crayola);
+  text-decoration: none;
+}
+
+.about-text a:hover,
+.about-text a:focus-visible,
+.service-item-text a:hover,
+.service-item-text a:focus-visible {
+  text-decoration: underline;
 }
 
 /**

@@ -238,25 +238,25 @@
 
           <section class="about-text">
             <p>
-              I'm a software engineer focused on systems-level work, open source, and p2p networking.
-              Currently contributing to <a href="https://holepunch.to/" target="_blank" rel="noopener"
-              style="color: var(--white-2); display: inline-block">Holepunch</a> —
-              bringing the Bare runtime and its ecosystem to native apps on every platform, so any
-              device becomes a full peer in p2p networks.
+              Systems and P2P engineer. I work close to the metal - native runtimes, video
+              pipelines, wire protocols - and on the open source that makes peer-to-peer practical.
+              At <a href="https://holepunch.to/" target="_blank" rel="noopener">Holepunch</a>,
+              makers of the <a href="https://github.com/holepunchto/bare" target="_blank" rel="noopener">Bare</a>
+              runtime for peer-to-peer apps, I bring it to native apps on every platform, so any
+              device can be a full peer in a P2P network.
             </p>
             <ul style="padding-left: 2em;">
               <li style="list-style-type: disc;">
-                Co-authored
-                <a href="https://github.com/holepunchto/compact-encoding-swift" target="_blank" rel="noopener" style="color: var(--white-2); display: inline-block">compact-encoding-swift</a>,
-                <a href="https://github.com/holepunchto/bare-rpc-swift" target="_blank" rel="noopener" style="color: var(--white-2); display: inline-block">bare-rpc-swift</a>,
-                <a href="https://github.com/holepunchto/hyperschema-swift" target="_blank" rel="noopener" style="color: var(--white-2); display: inline-block">hyperschema-swift</a>, and
-                <a href="https://github.com/holepunchto/hrpc-swift" target="_blank" rel="noopener" style="color: var(--white-2); display: inline-block">hrpc-swift</a>
-                — wire-compatible Swift implementations that let the same schema spec generate both JS and Swift peers.
+                Co-authored the
+                <a href="./blog/swift-peers-in-the-bare-rpc-ecosystem.html">Swift port</a>
+                and contributing to the
+                <a href="https://github.com/holepunchto/libhc" target="_blank" rel="noopener">C port</a>
+                of Holepunch's RPC and schema stack, so one schema spec drives JS, Swift, and C peers.
               </li>
               <li style="list-style-type: disc;">
                 Original author of the
-                <a href="https://www.remotepc.com/remote-access-linux" target="_blank" rel="noopener" style="color: var(--white-2); display: inline-block">RemotePC Linux App</a>
-                — Electron.js with Linux services and native Node.js modules for real-time remote streaming.
+                <a href="https://www.remotepc.com/remote-access-linux" target="_blank" rel="noopener">RemotePC Linux App</a>
+                - Electron.js with Linux services and native Node.js modules for real-time remote streaming.
               </li>
               <li style="list-style-type: disc;">
                 Achieved >30 FPS streaming by moving the capture/encode pipeline to GPU via hardware acceleration and FFmpeg.
@@ -266,25 +266,19 @@
               </li>
               <li style="list-style-type: disc;">
                 Created
-                <a href="https://bmrhelp.idrive.com/hc/en-us/articles/9743345928093-Access-client-devices-via-the-partner-manage-feature" target="_blank" rel="noopener" style="color: var(--white-2); display: inline-block">IDrive BMR's partner manage remote access</a>
+                <a href="https://bmrhelp.idrive.com/hc/en-us/articles/9743345928093-Access-client-devices-via-the-partner-manage-feature" target="_blank" rel="noopener">IDrive BMR's partner-managed remote access</a>
                 using WebRTC and signaling servers.
               </li>
               <li style="list-style-type: disc;">
                 Contributed to Postman's
-                <a href="https://www.postman.com/downloads/" target="_blank" rel="noopener" style="color: var(--white-2); display: inline-block">Linux ARM desktop app</a>
+                <a href="https://www.postman.com/downloads/" target="_blank" rel="noopener">Linux ARM desktop app</a>
                 and improved launch performance by 20%.
-              </li>
-              <li style="list-style-type: disc;">
-                Maintaining
-                <a href="https://www.npmjs.com/package/@theflashlabs/ajv-plus" target="_blank" rel="noopener" style="color: var(--white-2); display: inline-block">Ajv-Plus</a>,
-                a full JSON Schema-compliant fork of Ajv.
               </li>
             </ul>
             <p>
-              Available for consulting on C/C++, hardware-accelerated video, native Node addons, p2p networking,
-              Ajv-Plus, and JSON Schema. <a
+              Available for consulting on P2P networking, C/C++ and native Node addons, and
+              hardware-accelerated video. <a
                 href="mailto:ba@bavulapati.com"
-                style="color: var(--white-2); display: inline-block"
                 data-goatcounter-click="reach-out"
                 data-goatcounter-title="Reach out CTA"
                 >Reach out.</a
@@ -297,7 +291,8 @@
         -->
 
           <section class="service">
-            <h3 class="h3 service-title">What I'm doing</h3>
+            <!-- aria-label load-bearing: keeps the screen-reader name "What I'm doing" (without it AT reads "$ jobs") -->
+            <h3 class="h3 service-title is-terminal" aria-label="What I'm doing">jobs</h3>
 
             <ul class="service-list">
               <li class="service-item">
@@ -313,9 +308,9 @@
                   <h4 class="h4 service-item-title">Bare on Every Device</h4>
 
                   <p class="service-item-text">
-                    Bringing the Bare runtime and p2p ecosystem to native
-                    apps across desktop and mobile, so any device becomes a
-                    full peer in Holepunch networks.
+                    Native iOS, macOS, and Android hosts so a Bare app's
+                    P2P core runs unchanged on every platform - no
+                    per-platform rewrite.
                   </p>
                 </div>
               </li>
@@ -333,8 +328,9 @@
                   <h4 class="h4 service-item-title">JSON Schema</h4>
 
                   <p class="service-item-text">
-                    While JSON is probably the most popular format for
-                    exchanging data, JSON Schema needs a lot more awareness.
+                    Better JSON Schema validation - maintaining
+                    <a href="https://www.npmjs.com/package/@theflashlabs/ajv-plus" target="_blank" rel="noopener">Ajv-Plus</a>,
+                    a full JSON Schema-compliant fork of Ajv.
                   </p>
                 </div>
               </li>
@@ -342,18 +338,19 @@
               <li class="service-item">
                 <div class="service-icon-box">
                   <img loading="lazy"
-                    src="./assets/images/ajv-plus.png"
-                    alt="Ajv-Plus icon"
-                    width="60" height="60"
+                    src="./assets/images/munduchoopu.svg"
+                    alt=""
+                    width="40" height="40"
                   />
                 </div>
 
                 <div class="service-content-box">
-                  <h4 class="h4 service-item-title">Ajv-Plus</h4>
+                  <h4 class="h4 service-item-title">Munduchoopu</h4>
 
                   <p class="service-item-text">
-                    The most popular JSON Schema Validator needs maintenance
-                    and direction. Maintaining the fork of Ajv.
+                    A local-first personal wealth and expenses tracker. One
+                    shared core - Hypercore storage, typed hrpc - feeding
+                    native shells on every platform. (Telugu for "foresight")
                   </p>
                 </div>
               </li>
