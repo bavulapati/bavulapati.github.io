@@ -576,6 +576,12 @@ main {
   text-decoration: underline;
 }
 
+/* keep each package name and its trailing comma together as one unit,
+   so hyphenated names never break mid-word and commas never orphan */
+.about-text .nowrap {
+  white-space: nowrap;
+}
+
 /**
  * #service 
  */
