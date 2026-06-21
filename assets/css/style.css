@@ -582,14 +582,6 @@ main {
   text-decoration: underline;
 }
 
-/* keep each package name and its trailing comma together as one unit, so
-   hyphenated names never break mid-word and commas never orphan (also needs
-   display:inline to override the global "span { display: block }") */
-.about-text .nowrap {
-  display: inline;
-  white-space: nowrap;
-}
-
 /**
  * #service 
  */
