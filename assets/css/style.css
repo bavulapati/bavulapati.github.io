@@ -73,7 +73,7 @@
    */
 
   /* font-family */
-  --ff-poppins: "Poppins", sans-serif;
+  --ff-sans: "Inter", sans-serif;
 
   /* font-size */
   --fs-1: 24px;
@@ -177,7 +177,7 @@ textarea {
 }
 
 html {
-  font-family: var(--ff-poppins);
+  font-family: var(--ff-sans);
 }
 
 body {
@@ -292,7 +292,8 @@ article.active {
    $ ls ~/blog) and the "what I'm doing" subheading ($ jobs) */
 .article-title.is-terminal,
 .service-title.is-terminal {
-  font-family: ui-monospace, "SF Mono", Menlo, "Liberation Mono", monospace;
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-weight: var(--fw-500);
   text-transform: none;
 }
 
