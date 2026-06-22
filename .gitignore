@@ -3,3 +3,6 @@
 # CLAUDE.md is ignored by the global excludes, but here it is project
 # documentation, so track it in this repo.
 !CLAUDE.md
+
+# superpowers skill scratch (specs/brainstorms); tooling output, not site content
+docs/superpowers/
