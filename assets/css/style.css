@@ -65,6 +65,7 @@
   --vegas-gold: hsl(45, 54%, 58%);
   --light-gray: hsl(0, 0%, 84%);
   --light-gray-70: hsla(0, 0%, 84%, 0.8);
+  --icon-muted: hsl(0, 0%, 50%);
   --bittersweet-shimmer: hsl(0, 43%, 51%);
   --card-border: hsl(240, 2%, 18%);
 
@@ -206,7 +207,7 @@ article {
   justify-content: center;
   align-items: center;
   font-size: 16px;
-  color: var(--light-gray-70);
+  color: var(--icon-muted);
   transition: color var(--transition-1);
 }
 
@@ -473,7 +474,7 @@ main {
 }
 
 .social-item .social-link {
-  color: var(--light-gray-70);
+  color: var(--icon-muted);
   font-size: 18px;
   transition: color var(--transition-1);
 }
