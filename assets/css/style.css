@@ -169,6 +169,20 @@ button {
   outline-color: var(--orange-yellow-crayola);
 }
 
+/* Respect a user's reduced-motion preference: near-instant transitions and
+   animations (e.g. the sidebar accordion, the page-fade). Kept tiny rather
+   than 0 so transitionend/animationend still fire. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 html {
   font-family: var(--ff-sans);
 }
