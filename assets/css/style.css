@@ -654,8 +654,8 @@ main {
 
 .testimonials-quote {
   color: var(--white-2);
-  font-size: 18px;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.55;
 }
 
 .testimonials-attr {
