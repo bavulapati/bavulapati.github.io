@@ -479,7 +479,8 @@ main {
   transition: color var(--transition-1);
 }
 
-.social-item .social-link:hover {
+.social-item .social-link:hover,
+.social-item .social-link:focus-visible {
   color: var(--orange-yellow-crayola);
 }
 
