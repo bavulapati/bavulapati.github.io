@@ -968,6 +968,19 @@ main {
   margin-bottom: 15px;
 }
 
+.skill-category {
+  color: var(--white-2);
+  font-weight: var(--fw-500);
+  margin-bottom: 4px;
+}
+
+.skill-list-text {
+  color: var(--light-gray);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-300);
+  line-height: 1.6;
+}
+
 .skill .title-wrapper {
   display: flex;
   align-items: center;
