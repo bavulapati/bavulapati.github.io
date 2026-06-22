@@ -475,10 +475,11 @@ main {
 .social-item .social-link {
   color: var(--light-gray-70);
   font-size: 18px;
+  transition: color var(--transition-1);
 }
 
 .social-item .social-link:hover {
-  color: var(--light-gray);
+  color: var(--orange-yellow-crayola);
 }
 
 /*-----------------------------------*\
