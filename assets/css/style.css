@@ -549,22 +549,76 @@ main {
 /* gold links, matching the blog convention - obvious against light-gray body
    text. display:inline overrides the global "a { display: block }" so links
    flow within the prose instead of each taking their own line. */
-.about-text a,
+.about-text a:not(.cta-button),
 .service-item-text a {
   display: inline;
   color: var(--orange-yellow-crayola);
   text-decoration: none;
 }
 
-.about-text a:hover,
-.about-text a:focus-visible,
+.about-text a:not(.cta-button):hover,
+.about-text a:not(.cta-button):focus-visible,
 .service-item-text a:hover,
 .service-item-text a:focus-visible {
   text-decoration: underline;
 }
 
+/* consulting CTA: callout near the top of About + compact button in the sidebar */
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: var(--eerie-black-1);
+  border: 1px solid var(--card-border);
+  border-left: 2px solid var(--orange-yellow-crayola);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+
+.cta-text {
+  margin: 0;
+  color: var(--white-2);
+  font-size: var(--fs-6);
+}
+
+.cta-button {
+  display: inline-block;
+  flex-shrink: 0;
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+  font-weight: var(--fw-500);
+  font-size: var(--fs-6);
+  padding: 10px 22px;
+  border-radius: 10px;
+  white-space: nowrap;
+  transition: filter var(--transition-1);
+}
+
+.sidebar-cta {
+  display: block;
+  margin-top: 16px;
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+  font-weight: var(--fw-500);
+  font-size: var(--fs-7);
+  text-align: center;
+  padding: 9px 16px;
+  border-radius: 8px;
+  transition: filter var(--transition-1);
+}
+
+.cta-button:hover,
+.cta-button:focus-visible,
+.sidebar-cta:hover,
+.sidebar-cta:focus-visible {
+  filter: brightness(1.08);
+}
+
 /**
- * #service 
+ * #service
  */
 
 .service {
