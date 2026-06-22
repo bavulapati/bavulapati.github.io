@@ -23,13 +23,23 @@ const activatePage = function (name) {
     pages[i].classList.toggle("active", name === pages[i].dataset.page);
   }
   for (let i = 0; i < navigationLinks.length; i++) {
-    navigationLinks[i].classList.toggle("active", name === navigationLinks[i].innerHTML.toLowerCase());
+    const isActive = name === navigationLinks[i].innerHTML.toLowerCase();
+    navigationLinks[i].classList.toggle("active", isActive);
+    if (isActive) {
+      navigationLinks[i].setAttribute("aria-current", "page");
+    } else {
+      navigationLinks[i].removeAttribute("aria-current");
+    }
   }
 };
 
-// activate tab from URL hash on load (e.g. index.html#blog)
+// activate tab from URL hash on load (e.g. index.html#blog); ignore unknown hashes
 const hash = window.location.hash.slice(1);
-if (hash) { activatePage(hash); window.scrollTo(0, 0); }
+const isKnownPage = Array.from(pages).some((page) => page.dataset.page === hash);
+if (hash && isKnownPage) {
+  activatePage(hash);
+  window.scrollTo(0, 0);
+}
 
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
