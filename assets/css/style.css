@@ -549,15 +549,15 @@ main {
 /* gold links, matching the blog convention - obvious against light-gray body
    text. display:inline overrides the global "a { display: block }" so links
    flow within the prose instead of each taking their own line. */
-.about-text a,
+.about-text a:not(.cta-button),
 .service-item-text a {
   display: inline;
   color: var(--orange-yellow-crayola);
   text-decoration: none;
 }
 
-.about-text a:hover,
-.about-text a:focus-visible,
+.about-text a:not(.cta-button):hover,
+.about-text a:not(.cta-button):focus-visible,
 .service-item-text a:hover,
 .service-item-text a:focus-visible {
   text-decoration: underline;
