@@ -331,9 +331,18 @@ main {
   #SIDEBAR
 \*-----------------------------------*/
 
+/* Collapsed sidebar shows only .sidebar-info (avatar + name + title + CTA);
+   .sidebar-info_more is clipped by overflow + max-height and revealed by
+   .active. Hand-tuned height, summed down from the top edge:
+   border-top(1) + padding-top(15) + .sidebar-info(~100) + ~15 gap +
+   border-bottom(1) = 132. The bottom padding sits past the overflow clip, so
+   it is NOT in the sum (only the top padding counts; both borders show). The
+   ~15px gap shows through .separator's top margin, so the line stays hidden.
+   Can't use max-content/auto - the accordion transition needs an animatable
+   px value. Re-measure if the CTA, avatar, or fonts change. */
 .sidebar {
   margin-bottom: 15px;
-  max-height: 185px;
+  max-height: 132px;
   overflow: hidden;
   transition: var(--transition-2);
 }
@@ -1015,7 +1024,9 @@ main {
    */
 
   .sidebar {
-    max-height: 240px;
+    /* collapsed (see base .sidebar): 1 + padding-top(30) + .sidebar-info(~124)
+       + ~15 gap + 1 = 171 (bottom padding past the overflow clip) */
+    max-height: 171px;
     margin-bottom: 30px;
   }
 
