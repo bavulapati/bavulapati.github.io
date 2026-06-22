@@ -169,6 +169,7 @@
         font-size: 15px;
         line-height: 1.7;
         white-space: pre;
+        overflow-x: auto;
         color: hsl(0, 0%, 84%);
       }
     </style>
@@ -377,16 +378,24 @@ await peer.receive(data)</code></pre>
 
         <p><strong>Clean separation of concerns in iOS and macOS apps.</strong> Run your p2p networking stack as a <a href="https://github.com/holepunchto/bare-kit" target="_blank" rel="noopener">bare-kit</a> worklet — the entire Holepunch ecosystem in JS, where it lives — and write your UI and business logic in native Swift. hrpc-swift bridges the two: the same spec that defines your worklet's interface generates the Swift types and RPC methods automatically. The worklet owns the network; Swift owns the experience. The separation matters because the Holepunch networking stack is JavaScript-native — keeping it there means every protocol update and ecosystem improvement flows in without rewriting native extensions. Your Swift code stays clean: it makes typed RPC calls to the worklet instead of touching raw sockets, DHT internals, or binary framing.</p>
 
-        <div class="mermaid">
-%%{init: {'theme': 'dark'}}%%
-flowchart TB
-    swift["Swift\nUI + business logic"]
-    worklet["Bare worklet\nHyperswarm · HyperDHT · all p2p networking in JS"]
-    network["The network"]
-
-    swift &lt;-->|"hrpc-swift over bare-kit IPC"| worklet
-    worklet &lt;--> network
-        </div>
+        <div class="diagram" role="img" aria-label="Three-layer architecture: Swift (UI and business logic) talks to a Bare worklet (Hyperswarm, HyperDHT, all P2P networking in JS) over hrpc-swift on bare-kit IPC; the worklet talks to the network.">+------------------------------+
+|  Swift                       |
+|  UI + business logic         |
++------------------------------+
+               ^
+               |  hrpc-swift over bare-kit IPC
+               v
++------------------------------+
+|  Bare worklet                |
+|  Hyperswarm, HyperDHT,       |
+|  all P2P networking in JS    |
++------------------------------+
+               ^
+               |
+               v
++------------------------------+
+|  The network                 |
++------------------------------+</div>
 
         <p><strong>Swift devices as full peers.</strong> An iPhone or Mac is no longer bolted on the side — it's a node. It can register handlers, open streams, push events, and participate in duplex exchanges with any other peer in the network.</p>
 
@@ -403,8 +412,6 @@ flowchart TB
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha384-F/bZzf7p3Joyp5psL90p/p89AZJsndkSoGwRpXcZhleCWhd8SnRuoYo4d0yirjJp" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>hljs.highlightAll();</script>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 
     <!-- analytics: GoatCounter - self-hosted count.js + first-party endpoint (stats.bavulapati.com) so ad blockers don't drop it; no cookies -->
     <script
