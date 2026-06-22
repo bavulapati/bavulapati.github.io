@@ -59,6 +59,8 @@
   </head>
 
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
     <!--
     - #MAIN
   -->
@@ -213,7 +215,7 @@
       - #main-content
     -->
 
-      <div class="main-content">
+      <div class="main-content" id="main-content" tabindex="-1">
         <!--
         - #NAVBAR
       -->
@@ -238,7 +240,7 @@
         - #ABOUT
       -->
 
-        <article class="about active" data-page="about">
+        <article class="about active" data-page="about" tabindex="-1">
           <header>
             <!-- aria-label is load-bearing: keeps the screen-reader name "About me" (without it AT reads "$ whoami") -->
             <h2 class="h2 article-title is-terminal" aria-label="About me">whoami</h2>
@@ -442,7 +444,7 @@
         - #RESUME
       -->
 
-        <article class="resume" data-page="resume">
+        <article class="resume" data-page="resume" tabindex="-1">
           <header>
             <!-- aria-label load-bearing: keeps the screen-reader name "Resume" -->
             <h2 class="h2 article-title is-terminal" aria-label="Resume">cat resume</h2>
@@ -577,7 +579,7 @@
         - #BLOG
       -->
 
-        <article class="blog" data-page="blog">
+        <article class="blog" data-page="blog" tabindex="-1">
           <header>
             <!-- aria-label load-bearing: keeps the screen-reader name "Blog" -->
             <h2 class="h2 article-title is-terminal" aria-label="Blog">ls ~/blog</h2>
