@@ -654,7 +654,7 @@ main {
 
 .testimonials-quote {
   color: var(--white-2);
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.5;
 }
 
@@ -679,9 +679,11 @@ main {
   font-size: var(--fs-6);
 }
 
+/* fixed 13px so the role stays quieter than the name at all widths
+   (fs-7 jumps to 15px on desktop, matching the name's fs-6) */
 .testimonials-role {
   color: var(--light-gray-70);
-  font-size: var(--fs-7);
+  font-size: 13px;
 }
 
 .testimonials-source {
