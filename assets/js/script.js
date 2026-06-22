@@ -57,6 +57,11 @@ for (let i = 0; i < navigationLinks.length; i++) {
     activatePage(name);
     history.replaceState(null, "", "#" + name);
     window.scrollTo(0, 0);
+    // move focus to the now-visible page so screen readers land on the new
+    // content - the display:none/block swap is otherwise silent (WCAG 4.1.3).
+    // preventScroll keeps the scroll-to-top above intact.
+    const active = document.querySelector("[data-page].active");
+    if (active) active.focus({ preventScroll: true });
   });
 }
 

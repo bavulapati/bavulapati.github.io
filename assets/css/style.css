@@ -169,6 +169,37 @@ button {
   outline-color: var(--orange-yellow-crayola);
 }
 
+/* Skip link: off-screen until focused, then visible top-left. Lets keyboard
+   users jump past the sidebar, which precedes the nav/content in the DOM. */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: -9999px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+  font-weight: var(--fw-500);
+  border-radius: 0 0 8px 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* The skip-link landing and the tab panels take programmatic focus via
+   tabindex="-1". Suppress the ring on the skip target unconditionally - a
+   ring around the whole content region is noise and the intent is obvious.
+   For the tab panels, keep the ring for keyboard users (a landing cue when
+   switching tabs) but drop it for pointer-driven focus. */
+.main-content:focus {
+  outline: none;
+}
+
+[data-page]:focus:not(:focus-visible) {
+  outline: none;
+}
+
 /* Respect a user's reduced-motion preference: near-instant transitions and
    animations (e.g. the sidebar accordion, the page-fade). Kept tiny rather
    than 0 so transitionend/animationend still fire. */
