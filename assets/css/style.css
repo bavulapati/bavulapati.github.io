@@ -65,6 +65,7 @@
   --vegas-gold: hsl(45, 54%, 58%);
   --light-gray: hsl(0, 0%, 84%);
   --light-gray-70: hsla(0, 0%, 84%, 0.8);
+  --icon-muted: hsl(0, 0%, 50%);
   --bittersweet-shimmer: hsl(0, 43%, 51%);
   --card-border: hsl(240, 2%, 18%);
 
@@ -197,28 +198,22 @@ article {
   margin: 16px 0;
 }
 
+/* contact icons: flat glyphs, muted by default and gold on hover - matching
+   the boxless gray->gold contact icons in the blog post headers */
 .icon-box {
-  position: relative;
-  background: var(--border-gradient-onyx);
   width: 30px;
   height: 30px;
-  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 16px;
-  color: var(--orange-yellow-crayola);
-  box-shadow: var(--shadow-1);
-  z-index: 1;
+  color: var(--icon-muted);
+  transition: color var(--transition-1);
 }
 
-.icon-box::before {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  background: var(--eerie-black-1);
-  border-radius: inherit;
-  z-index: -1;
+.contact-item:hover .icon-box,
+.contact-item:focus-within .icon-box {
+  color: var(--orange-yellow-crayola);
 }
 
 article {
@@ -338,20 +333,20 @@ main {
 
 .sidebar {
   margin-bottom: 15px;
-  max-height: 112px;
+  max-height: 185px;
   overflow: hidden;
   transition: var(--transition-2);
 }
 
 .sidebar.active {
-  max-height: 405px;
+  max-height: 470px;
 }
 
 .sidebar-info {
   position: relative;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   gap: 15px;
 }
 
@@ -479,12 +474,14 @@ main {
 }
 
 .social-item .social-link {
-  color: var(--light-gray-70);
+  color: var(--icon-muted);
   font-size: 18px;
+  transition: color var(--transition-1);
 }
 
-.social-item .social-link:hover {
-  color: var(--light-gray);
+.social-item .social-link:hover,
+.social-item .social-link:focus-visible {
+  color: var(--orange-yellow-crayola);
 }
 
 /*-----------------------------------*\
@@ -1001,9 +998,6 @@ main {
   }
 
   .icon-box {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
     font-size: 18px;
   }
 
@@ -1021,12 +1015,12 @@ main {
    */
 
   .sidebar {
-    max-height: 180px;
+    max-height: 240px;
     margin-bottom: 30px;
   }
 
   .sidebar.active {
-    max-height: 584px;
+    max-height: 650px;
   }
 
   .sidebar-info {
@@ -1380,6 +1374,7 @@ main {
 
   .sidebar-info {
     flex-direction: column;
+    align-items: center;
   }
 
   .avatar-box img {
