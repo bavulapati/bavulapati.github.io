@@ -12,6 +12,15 @@ const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 // sidebar toggle functionality for mobile
 sidebarBtn.addEventListener("click", function () {
   elementToggleFunc(sidebar);
+  const expanded = sidebar.classList.contains("active");
+  sidebarBtn.setAttribute("aria-expanded", expanded);
+  // keep the label honest once open. Sync both: the button is icon-only on
+  // mobile (named by aria-label) and text-only at >=580 (named by the span),
+  // and aria-label wins over the span text, so they must agree.
+  sidebarBtn.setAttribute("aria-label", expanded ? "Hide contacts" : "Show contacts");
+  sidebarBtn.querySelector("span").textContent = expanded
+    ? "Hide Contacts"
+    : "Show Contacts";
 });
 
 // page navigation variables
